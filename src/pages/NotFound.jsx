@@ -1,3 +1,8 @@
 export default function NotFound() {
-  return <div>404 - Page Not Found (Phase 0 placeholder)</div>;
+  return (
+    <div style={{ padding: '2rem 1.5rem' }}>
+      <h1>404 — Page Not Found</h1>
+      <p>The page you are looking for does not exist yet.</p>
+    </div>
+  );
 }
