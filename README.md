@@ -22,7 +22,7 @@ Additional scripts:
 
 Key folders inside `src/`:
 
-- `components/` – reusable React components used across different parts of the application.
+- `components/` – shared UI, module, and core components.
 - `config/` – site configuration and navigation definitions.
 - `content/` – content and data entries (e.g., personal profile).
 - `hooks/` – reusable React hooks.
