@@ -18,7 +18,6 @@ module.exports = {
       version: 'detect',
     },
   },
-  plugins: ['react', 'react-hooks', 'jsx-a11y'],
   rules: {
     'react/prop-types': 'warn',
   },
