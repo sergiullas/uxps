@@ -165,11 +165,11 @@ export default function Home() {
                   </Typography>
                   <Box component="ul" sx={{ m: 0, mt: 1, pl: 3 }}>
                     {role.highlights.map((highlight) => (
-                      <li key={highlight}>
+                      <Box component="li" key={highlight}>
                         <Typography variant="body2" color="text.secondary">
                           {highlight}
                         </Typography>
-                      </li>
+                      </Box>
                     ))}
                   </Box>
                 </Stack>
