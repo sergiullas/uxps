@@ -21,9 +21,7 @@ export function validateCaseStudy(caseStudy) {
       warnings.push(`Section at index ${index} is missing an id`);
     }
 
-    const mediaItems = [];
-    if (section.media) mediaItems.push(section.media);
-    if (Array.isArray(section.gallery)) mediaItems.push(...section.gallery);
+    const mediaItems = [section.media, ...(section.gallery || [])].filter(Boolean);
 
     mediaItems.forEach((media, mediaIndex) => {
       if (media && !media.alt) {

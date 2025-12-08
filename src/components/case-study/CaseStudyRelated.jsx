@@ -6,28 +6,24 @@ function getRelatedCaseStudies(currentCaseStudy, allCaseStudies = []) {
   if (!currentCaseStudy) return [];
 
   const { slug, hero } = currentCaseStudy;
-  const currentTags = hero?.tags || [];
+  const currentTagsSet = new Set(hero?.tags || []);
   const otherCaseStudies = allCaseStudies.filter((cs) => cs.slug !== slug);
 
   if (!otherCaseStudies.length) return [];
 
   const withSharedTags = otherCaseStudies.filter((cs) => {
     const tags = cs.hero?.tags || [];
-    return tags.some((tag) => currentTags.includes(tag));
+    return tags.some((tag) => currentTagsSet.has(tag));
   });
 
   if (withSharedTags.length) return withSharedTags.slice(0, 3);
 
   const currentIndex = allCaseStudies.findIndex((cs) => cs.slug === slug);
-  const results = [];
-  for (let i = 1; i <= 2; i += 1) {
-    const nextIndex = (currentIndex + i) % allCaseStudies.length;
-    const candidate = allCaseStudies[nextIndex];
-    if (candidate.slug !== slug) {
-      results.push(candidate);
-    }
-  }
-  return results;
+  const rotatedStudies = [
+    ...allCaseStudies.slice(currentIndex + 1),
+    ...allCaseStudies.slice(0, currentIndex),
+  ];
+  return rotatedStudies.slice(0, 2);
 }
 
 export default function CaseStudyRelated({ currentCaseStudy, allCaseStudies = [] }) {

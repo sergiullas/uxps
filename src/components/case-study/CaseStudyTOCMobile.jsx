@@ -4,6 +4,14 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export default function CaseStudyTOCMobile({ sections = [], toc = {} }) {
   const [open, setOpen] = React.useState(false);
+  const sectionsById = React.useMemo(
+    () =>
+      sections.reduce((acc, section) => {
+        acc[section.id] = section;
+        return acc;
+      }, {}),
+    [sections],
+  );
 
   if (!toc?.enabled || !sections.length) return null;
 
@@ -46,7 +54,7 @@ export default function CaseStudyTOCMobile({ sections = [], toc = {} }) {
                   sx={{ fontWeight: 600 }}
                   onClick={() => setOpen(false)}
                 >
-                  {sections.find((section) => section.id === id)?.title || id}
+                  {sectionsById[id]?.title || id}
                 </Link>
               </Box>
             ))}
