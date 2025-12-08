@@ -56,7 +56,7 @@ export default function Footer() {
         </Stack>
 
         <Typography variant="caption" color="text.secondary">
-          {`© ${new Date().getFullYear()} ${siteMeta.siteName}`}
+          {copyright}
         </Typography>
         <Typography variant="caption" color="text.secondary">
           {siteMeta.footer.attribution}
