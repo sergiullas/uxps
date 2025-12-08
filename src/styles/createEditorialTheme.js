@@ -5,7 +5,7 @@ export function createEditorialTheme(mode = 'light') {
   const paletteTokens =
     mode === 'dark' ? editorialThemeTokens.palette.dark : editorialThemeTokens.palette.light;
 
-  return createTheme({
+  const theme = createTheme({
     palette: paletteTokens,
     typography: editorialThemeTokens.typography,
     shape: editorialThemeTokens.shape,
@@ -20,7 +20,7 @@ export function createEditorialTheme(mode = 'light') {
           },
           a: {
             color: 'inherit',
-            textDecorationColor: 'rgba(148, 163, 184, 0.6)',
+            textDecorationColor: paletteTokens.divider,
           },
           '@media (prefers-reduced-motion: reduce)': {
             '*': {
@@ -36,9 +36,10 @@ export function createEditorialTheme(mode = 'light') {
         styleOverrides: {
           root: {
             borderRadius: editorialThemeTokens.shape.borderRadius / 2,
-            textTransform: 'none',
-            letterSpacing: '0.02em',
-            fontWeight: 500,
+            textTransform: editorialThemeTokens.typography.button.textTransform,
+            letterSpacing: editorialThemeTokens.typography.button.letterSpacing,
+            fontWeight: editorialThemeTokens.typography.button.fontWeight,
+            fontSize: editorialThemeTokens.typography.button.fontSize,
             paddingInline: '1.25rem',
             paddingBlock: '0.7rem',
           },
@@ -53,4 +54,9 @@ export function createEditorialTheme(mode = 'light') {
       },
     },
   });
+
+  // Expose a custom card shadow on the theme for use in sx/styles.
+  theme.shadows.card = editorialThemeTokens.shadows.card;
+
+  return theme;
 }

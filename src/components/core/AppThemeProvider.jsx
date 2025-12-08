@@ -16,20 +16,16 @@ export default function AppThemeProvider({ children }) {
   const [mode, setMode] = React.useState('light');
 
   React.useEffect(() => {
-    let initialMode = 'light';
+    let determinedMode = prefersDarkMode ? 'dark' : 'light';
 
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored === 'light' || stored === 'dark') {
-        initialMode = stored;
-      } else {
-        initialMode = prefersDarkMode ? 'dark' : 'light';
+      const storedMode = window.localStorage.getItem(STORAGE_KEY);
+      if (storedMode === 'light' || storedMode === 'dark') {
+        determinedMode = storedMode;
       }
-    } catch (e) {
-      initialMode = prefersDarkMode ? 'dark' : 'light';
-    }
-
-    setMode(initialMode);
+    } catch (e) {}
+    
+    setMode(determinedMode);
   }, [prefersDarkMode]);
 
   React.useEffect(() => {
