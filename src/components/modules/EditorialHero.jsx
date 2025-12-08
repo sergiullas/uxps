@@ -35,19 +35,15 @@ export default function EditorialHero() {
             id="hero-heading"
             component="h1"
             variant="h1"
-            sx={{
-              ...theme.typography.h1,
-              color: theme.palette.text.primary,
-            }}
+            color="text.primary"
           >
             Designing systems that help complex organizations move faster.
           </Typography>
 
           <Typography
             variant="body1"
+            color="text.secondary"
             sx={{
-              ...theme.typography.body1,
-              color: theme.palette.text.secondary,
               maxWidth: { xs: '100%', md: theme.spacing(80) },
             }}
           >
@@ -59,7 +55,6 @@ export default function EditorialHero() {
             <Typography
               variant="body2"
               sx={{
-                ...theme.typography.body2,
                 color: alpha(theme.palette.text.secondary, 0.9),
                 textTransform: 'uppercase',
                 letterSpacing: theme.typography.overline?.letterSpacing,
@@ -82,7 +77,6 @@ export default function EditorialHero() {
                 to="/resume"
                 underline="none"
                 sx={{
-                  ...theme.typography.nav,
                   textTransform: theme.typography.nav?.textTransform,
                   letterSpacing: theme.typography.nav?.letterSpacing,
                   color: theme.palette.text.secondary,
@@ -106,7 +100,7 @@ export default function EditorialHero() {
                   },
                 }}
               >
-                <span>View resume</span>
+                View resume
               </MuiLink>
             </Stack>
           </Stack>
@@ -128,28 +122,28 @@ export default function EditorialHero() {
         >
           <Typography
             variant="body1"
+            color="text.primary"
             sx={{
-              ...theme.typography.body1,
-              color: theme.palette.text.primary,
               fontWeight: 600,
             }}
           >
             Recent focus
           </Typography>
-          <Typography
-            variant="body2"
+          <Box
+            component="ul"
             sx={{
-              ...theme.typography.body2,
-              color: theme.palette.text.secondary,
+              m: 0,
+              p: 0,
+              listStyle: 'none',
+              typography: 'body2',
+              color: 'text.secondary',
               lineHeight: 1.7,
             }}
           >
-            * Launching editorial system updates for emerging B2B products
-            <br />
-            * Prototyping cross-platform workflows for research teams
-            <br />
-            * Coaching ICs on design systems thinking
-          </Typography>
+            <Box component="li">* Launching editorial system updates for emerging B2B products</Box>
+            <Box component="li">* Prototyping cross-platform workflows for research teams</Box>
+            <Box component="li">* Coaching ICs on design systems thinking</Box>
+          </Box>
 
           <MuiLink
             component={RouterLink}
@@ -185,7 +179,6 @@ export default function EditorialHero() {
               component="span"
               variant="body2"
               sx={{
-                ...theme.typography.body2,
                 color: theme.palette.text.primary,
                 fontWeight: 600,
               }}
