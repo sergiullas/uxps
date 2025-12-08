@@ -149,8 +149,8 @@ export default function EditorialHero() {
               lineHeight: 1.7,
             }}
           >
-            {heroContent.bullets.map((item, index) => (
-              <Box key={index} component="li">
+            {heroContent.bullets.map((item) => (
+              <Box key={item} component="li">
                 * {item}
               </Box>
             ))}
