@@ -23,7 +23,7 @@ export default function AppThemeProvider({ children }) {
       if (storedMode === 'light' || storedMode === 'dark') {
         determinedMode = storedMode;
       }
-    } catch (e) {}
+    } catch (e) { /* localStorage may be unavailable; fail silently */ }
     
     setMode(determinedMode);
   }, [prefersDarkMode]);
