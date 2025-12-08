@@ -1,17 +1,26 @@
 import * as React from 'react';
 import { Box, Stack } from '@mui/material';
+import CaseStudyBreadcrumbs from './CaseStudyBreadcrumbs.jsx';
+import CaseStudyFooterNav from './CaseStudyFooterNav.jsx';
 import CaseStudyHeaderMeta from './CaseStudyHeaderMeta.jsx';
 import CaseStudyIntro from './CaseStudyIntro.jsx';
 import CaseStudyOutcomes from './CaseStudyOutcomes.jsx';
-import CaseStudyTOC from './CaseStudyTOC.jsx';
+import CaseStudyRelated from './CaseStudyRelated.jsx';
 import CaseStudySection from './CaseStudySection.jsx';
+import CaseStudyTOC from './CaseStudyTOC.jsx';
+import CaseStudyTOCMobile from './CaseStudyTOCMobile.jsx';
+import { workItems } from '../../content/work.js';
+import { CASE_STUDIES } from '../../content/case-studies/index.js';
 
 export default function CaseStudyLayout({ caseStudy }) {
-  const { hero, intro, outcomes, sections = [], toc } = caseStudy;
+  const { hero, intro, outcomes, sections = [], toc, slug } = caseStudy;
 
   return (
     <Stack spacing={{ xs: 4, md: 6 }}>
+      <CaseStudyBreadcrumbs caseStudy={caseStudy} />
       <CaseStudyHeaderMeta hero={hero} />
+
+      <CaseStudyTOCMobile sections={sections} toc={toc} />
 
       <Box
         sx={{
@@ -33,6 +42,10 @@ export default function CaseStudyLayout({ caseStudy }) {
           <CaseStudySection key={section.id} section={section} />
         ))}
       </Stack>
+
+      <CaseStudyRelated currentCaseStudy={caseStudy} allCaseStudies={CASE_STUDIES} />
+
+      <CaseStudyFooterNav currentSlug={slug} workItems={workItems} />
     </Stack>
   );
 }

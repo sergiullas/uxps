@@ -6,6 +6,7 @@ import { getCaseStudyBySlug } from '../../content/case-studies/index.js';
 import SEOHead from '../SEOHead.jsx';
 import CaseStudyLayout from './CaseStudyLayout.jsx';
 import CaseStudyNotFound from './CaseStudyNotFound.jsx';
+import { validateCaseStudy } from '../../utils/validateCaseStudy.js';
 
 export default function CaseStudyRoute() {
   const { slug } = useParams();
@@ -24,6 +25,10 @@ export default function CaseStudyRoute() {
   }
 
   const { meta, hero } = caseStudy;
+
+  if (import.meta.env.DEV) {
+    validateCaseStudy(caseStudy);
+  }
 
   return (
     <>
