@@ -6,6 +6,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 import AppSection from '../ui/AppSection.jsx';
 import AppButton from '../ui/AppButton.jsx';
+import { heroContent } from '../../content/hero.js';
 
 export default function EditorialHero() {
   const theme = useTheme();
@@ -31,13 +32,26 @@ export default function EditorialHero() {
           spacing={{ xs: 3, md: 3.5 }}
           sx={{ maxWidth: { xs: '100%', md: theme.spacing(90) } }}
         >
+          {heroContent.eyebrow ? (
+            <Typography
+              variant="body2"
+              sx={{
+                color: alpha(theme.palette.text.secondary, 0.9),
+                textTransform: 'uppercase',
+                letterSpacing: theme.typography.overline?.letterSpacing,
+              }}
+            >
+              {heroContent.eyebrow}
+            </Typography>
+          ) : null}
+
           <Typography
             id="hero-heading"
             component="h1"
             variant="h1"
             color="text.primary"
           >
-            Designing systems that help complex organizations move faster.
+            {heroContent.title}
           </Typography>
 
           <Typography
@@ -47,34 +61,35 @@ export default function EditorialHero() {
               maxWidth: { xs: '100%', md: theme.spacing(80) },
             }}
           >
-            I partner with teams to translate ambiguity into clear product direction, build resilient
-            design systems, and deliver experiences that balance craft with measurable outcomes.
+            {heroContent.body}
           </Typography>
 
           <Stack spacing={{ xs: 2.5, sm: 3 }}>
-            <Typography
-              variant="body2"
-              sx={{
-                color: alpha(theme.palette.text.secondary, 0.9),
-                textTransform: 'uppercase',
-                letterSpacing: theme.typography.overline?.letterSpacing,
-              }}
-            >
-              Currently based in Seattle · Open to remote-friendly collaborations
-            </Typography>
+            {heroContent.meta ? (
+              <Typography
+                variant="body2"
+                sx={{
+                  color: alpha(theme.palette.text.secondary, 0.9),
+                  textTransform: 'uppercase',
+                  letterSpacing: theme.typography.overline?.letterSpacing,
+                }}
+              >
+                {heroContent.meta}
+              </Typography>
+            ) : null}
 
             <Stack
               direction={{ xs: 'column', sm: 'row' }}
               spacing={{ xs: 2, sm: 2.5 }}
               sx={{ alignItems: { xs: 'stretch', sm: 'center' } }}
             >
-              <AppButton component={RouterLink} to="/#work" color="primary">
-                View selected work
+              <AppButton component={RouterLink} to={heroContent.primaryCta.href} color="primary">
+                {heroContent.primaryCta.label}
               </AppButton>
 
               <MuiLink
                 component={RouterLink}
-                to="/resume"
+                to={heroContent.secondaryCta.href}
                 underline="none"
                 sx={{
                   textTransform: theme.typography.nav?.textTransform,
@@ -100,7 +115,7 @@ export default function EditorialHero() {
                   },
                 }}
               >
-                View resume
+                {heroContent.secondaryCta.label}
               </MuiLink>
             </Stack>
           </Stack>
@@ -120,14 +135,8 @@ export default function EditorialHero() {
             p: { xs: theme.spacing(2.5), sm: theme.spacing(3) },
           }}
         >
-          <Typography
-            variant="body1"
-            color="text.primary"
-            sx={{
-              fontWeight: 600,
-            }}
-          >
-            Recent focus
+          <Typography variant="body1" color="text.primary" sx={{ fontWeight: 600 }}>
+            {heroContent.sidebarTitle}
           </Typography>
           <Box
             component="ul"
@@ -140,15 +149,17 @@ export default function EditorialHero() {
               lineHeight: 1.7,
             }}
           >
-            <Box component="li">* Launching editorial system updates for emerging B2B products</Box>
-            <Box component="li">* Prototyping cross-platform workflows for research teams</Box>
-            <Box component="li">* Coaching ICs on design systems thinking</Box>
+            {heroContent.bullets.map((item, index) => (
+              <Box key={index} component="li">
+                * {item}
+              </Box>
+            ))}
           </Box>
 
           <MuiLink
             component={RouterLink}
-            to="/#contact"
-            aria-label="Jump to contact section"
+            to={heroContent.contactShortcut.href}
+            aria-label={heroContent.contactShortcut.ariaLabel}
             underline="none"
             sx={{
               display: 'inline-flex',
@@ -181,7 +192,7 @@ export default function EditorialHero() {
               color="text.primary"
               sx={{ fontWeight: 600 }}
             >
-              Contact
+              {heroContent.contactShortcut.label}
             </Typography>
           </MuiLink>
         </Box>

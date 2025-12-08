@@ -3,21 +3,21 @@ import { Stack, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 
 import AppSection from '../components/ui/AppSection.jsx';
+import { siteMeta } from '../content/siteMeta.js';
 
 export default function NotFound() {
   return (
     <AppSection component="section" aria-labelledby="not-found-heading">
       <Helmet>
-        <title>Page not found — Sergio Antezana</title>
+        <title>Page not found — {siteMeta.author}</title>
         <meta name="robots" content="noindex" />
       </Helmet>
       <Stack spacing={1.5}>
         <Typography id="not-found-heading" component="h1" variant="h2" color="text.primary">
-          404 — Page not found
+          {siteMeta.notFound.title}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          The page you are looking for does not exist yet. Please return to the home page or use the navigation to
-          explore published sections.
+          {siteMeta.notFound.message}
         </Typography>
       </Stack>
     </AppSection>
