@@ -8,7 +8,7 @@ const spotifySummary = {
   client: 'Personal Concept', // or real client if allowed
   summary:
     'Redesigned the Spotify mobile experience to reduce friction in discovery and improve library navigation.',
-  thumbnail: '/images/projects/spotify-thumb.webp',
+  thumbnail: '/images/projects/spotify-thumb.svg',
   tags: ['Mobile', 'Consumer', 'Interaction Design'],
   brand: {
     primaryColor: '#1DB954', // will be used for contextual theming

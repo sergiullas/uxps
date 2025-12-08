@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
+.env.production.local
+.env.development.local
 *.code-workspace
 
 # Editor directories and files

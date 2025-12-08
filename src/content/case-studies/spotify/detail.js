@@ -29,8 +29,8 @@ const spotifyDetail = {
       'Created a clear separation between “active listening” and “discovery mode.”',
     ],
     beforeAfter: {
-      before: '/images/projects/spotify-before.webp',
-      after: '/images/projects/spotify-after.webp',
+      before: '/images/projects/spotify-before.svg',
+      after: '/images/projects/spotify-after.svg',
       caption: 'Comparison of the old vs. new library layout.',
     },
   },
