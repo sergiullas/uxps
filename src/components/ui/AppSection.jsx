@@ -12,6 +12,7 @@ export default React.forwardRef(function AppSection({ id, component = 'section',
         py: { xs: 4, sm: 6, md: 8 },
         maxWidth,
         mx: 'auto',
+        width: '100%',
         ...sx,
       }}
       {...props}

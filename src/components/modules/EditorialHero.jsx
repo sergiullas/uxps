@@ -107,7 +107,6 @@ export default function EditorialHero() {
         </Stack>
 
         <Box
-          id="work"
           sx={{
             display: 'flex',
             flexDirection: 'column',
