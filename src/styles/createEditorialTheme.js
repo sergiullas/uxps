@@ -10,7 +10,12 @@ export function createEditorialTheme(mode = 'light') {
     typography: editorialThemeTokens.typography,
     shape: editorialThemeTokens.shape,
     spacing: editorialThemeTokens.spacing,
-    // We keep most default shadows; card-level shadows can be applied via sx or component overrides.
+    
+    // New top-level property for custom shadows (Declarative approach)
+    customShadows: {
+      card: editorialThemeTokens.shadows.card,
+    },
+
     components: {
       MuiCssBaseline: {
         styleOverrides: {
@@ -54,9 +59,6 @@ export function createEditorialTheme(mode = 'light') {
       },
     },
   });
-
-  // Expose a custom card shadow on the theme for use in sx/styles.
-  theme.shadows.card = editorialThemeTokens.shadows.card;
 
   return theme;
 }
