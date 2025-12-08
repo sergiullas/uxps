@@ -2,7 +2,7 @@
 
 const education = [
   {
-    id: 'degree-1',
+    id: 'university-name-ba-design',
     school: 'University Name',
     degree: 'B.A. in Design',
     start: '2012',

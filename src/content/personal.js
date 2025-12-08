@@ -5,8 +5,9 @@ const personal = {
   role: 'Lead UX Designer',
   location: 'City, Country',
   tagline: 'Designing systems, not just screens.',
-  bio: `I am a UX designer who focuses on complex systems, workflows, and tools.
-I care about accessibility, long-term maintainability, and designing products teams can actually ship.`,
+  bio:
+    'I am a UX designer who focuses on complex systems, workflows, and tools.\n' +
+    'I care about accessibility, long-term maintainability, and designing products teams can actually ship.',
   email: 'you@example.com',
   social: {
     linkedin: 'https://www.linkedin.com/in/your-profile',

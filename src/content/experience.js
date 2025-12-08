@@ -2,11 +2,11 @@
 
 const experience = [
   {
-    id: 'company-1',
+    id: 'company-one-senior-ux-designer',
     company: 'Company One',
     role: 'Senior UX Designer',
     start: '2021',
-    end: 'Present', // or 'Present'
+    end: 'Present',
     location: 'Remote',
     highlights: [
       'Led UX for a workflow automation platform used by enterprise customers.',
@@ -14,7 +14,7 @@ const experience = [
     ],
   },
   {
-    id: 'company-2',
+    id: 'company-two-ux-designer',
     company: 'Company Two',
     role: 'UX Designer',
     start: '2018',
