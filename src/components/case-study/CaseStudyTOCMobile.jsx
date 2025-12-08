@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Box, Button, Divider, Drawer, IconButton, Link, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function CaseStudyTOCMobile({ sections = [], toc = {} }) {
+export default function CaseStudyTOCMobile({ sections = [], toc = {}, activeSectionId }) {
   const [open, setOpen] = React.useState(false);
+  const isTOCEnabled = Boolean(toc?.enabled);
   const sectionsById = React.useMemo(
     () =>
       sections.reduce((acc, section) => {
@@ -13,13 +14,17 @@ export default function CaseStudyTOCMobile({ sections = [], toc = {} }) {
     [sections],
   );
 
-  if (!toc?.enabled || !sections.length) return null;
+  const availableIds = React.useMemo(() => sections.map((section) => section.id), [sections]);
+  const sectionIds = React.useMemo(
+    () => (toc.sectionIds?.length ? toc.sectionIds : availableIds),
+    [toc.sectionIds, availableIds],
+  );
+  const filteredIds = React.useMemo(
+    () => sectionIds.filter((id) => availableIds.includes(id)),
+    [sectionIds, availableIds],
+  );
 
-  const availableIds = sections.map((section) => section.id);
-  const sectionIds = toc.sectionIds?.length ? toc.sectionIds : availableIds;
-  const filteredIds = sectionIds.filter((id) => availableIds.includes(id));
-
-  if (!filteredIds.length) return null;
+  if (!isTOCEnabled || !sections.length || !filteredIds.length) return null;
 
   return (
     <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -45,19 +50,31 @@ export default function CaseStudyTOCMobile({ sections = [], toc = {} }) {
           </Stack>
           <Divider />
           <Stack component="ul" spacing={1} sx={{ listStyle: 'none', p: 0, m: 0 }}>
-            {filteredIds.map((id) => (
-              <Box component="li" key={id}>
-                <Link
-                  href={`#${id}`}
-                  underline="hover"
-                  color="primary"
-                  sx={{ fontWeight: 600 }}
-                  onClick={() => setOpen(false)}
-                >
-                  {sectionsById[id]?.title || id}
-                </Link>
-              </Box>
-            ))}
+            {filteredIds.map((id) => {
+              const isActive = id === activeSectionId;
+
+              return (
+                <Box component="li" key={id}>
+                  <Link
+                    href={`#${id}`}
+                    underline="hover"
+                    color={isActive ? 'text.primary' : 'primary'}
+                    aria-current={isActive ? 'location' : undefined}
+                    sx={(t) => ({
+                      display: 'block',
+                      fontWeight: isActive ? 700 : 600,
+                      px: 0.5,
+                      py: 0.75,
+                      borderRadius: t.shape.borderRadius,
+                      backgroundColor: isActive ? t.palette.action.hover : 'transparent',
+                    })}
+                    onClick={() => setOpen(false)}
+                  >
+                    {sectionsById[id]?.title || id}
+                  </Link>
+                </Box>
+              );
+            })}
           </Stack>
         </Stack>
       </Drawer>
