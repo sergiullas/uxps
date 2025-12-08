@@ -15,7 +15,7 @@ export default function AppThemeProvider({ children }) {
 
   const [mode, setMode] = React.useState('light');
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     let determinedMode = prefersDarkMode ? 'dark' : 'light';
 
     try {
