@@ -13,7 +13,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
-import { ColorModeContext } from './AppThemeProvider.jsx';
+import { ColorModeContext } from './AppThemeProvider';
 
 const NAV_ITEMS = [
   { label: 'Work', href: '#work' },
