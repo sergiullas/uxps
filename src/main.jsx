@@ -7,6 +7,7 @@ import AppThemeProvider from './components/core/AppThemeProvider.jsx';
 import Layout from './components/core/Layout.jsx';
 import Home from './pages/Home.jsx';
 import NotFound from './pages/NotFound.jsx';
+import CaseStudyRoute from './components/case-study/CaseStudyRoute.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,6 +17,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/work" element={<Home />} />
+              <Route path="/work/:slug" element={<CaseStudyRoute />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

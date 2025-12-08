@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Box, Divider, Link, Stack, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
+import { Link as RouterLink } from 'react-router-dom';
 
 import EditorialHero from '../components/modules/EditorialHero.jsx';
 import AppSection from '../components/ui/AppSection.jsx';
@@ -49,23 +50,54 @@ export default function Home() {
             }}
           >
             {workItems.map((item) => (
-              <Box
-                component="li"
-                key={item.id}
-                sx={(t) => ({
-                  border: `1px solid ${t.palette.divider}`,
-                  borderRadius: t.shape.borderRadius,
-                  backgroundColor: t.palette.background.paper,
-                  p: { xs: t.spacing(2.5), md: t.spacing(3) },
-                  boxShadow: t.customShadows?.card,
-                })}
-              >
-                <Typography component="h3" variant="h4" color="text.primary" sx={{ mb: 1 }}>
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.summary}
-                </Typography>
+              <Box component="li" key={item.id}>
+                <Link
+                  component={RouterLink}
+                  to={`/work/${item.slug}`}
+                  underline="none"
+                  sx={(t) => ({
+                    display: 'block',
+                    border: `1px solid ${t.palette.divider}`,
+                    borderRadius: t.shape.borderRadius,
+                    backgroundColor: t.palette.background.paper,
+                    p: { xs: t.spacing(2.5), md: t.spacing(3) },
+                    boxShadow: t.customShadows?.card,
+                    transition: 'border-color 150ms ease, box-shadow 150ms ease',
+                    '&:hover, &:focus-visible': {
+                      borderColor: t.palette.primary.main,
+                      boxShadow: t.customShadows?.primary,
+                    },
+                  })}
+                  aria-label={`View case study: ${item.title}`}
+                >
+                  <Stack spacing={1.5}>
+                    <Typography component="h3" variant="h4" color="text.primary">
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.summary}
+                    </Typography>
+                    {item.tags?.length ? (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                        {item.tags.map((tag) => (
+                          <Box
+                            key={tag}
+                            sx={{
+                              px: 1,
+                              py: 0.5,
+                              borderRadius: 1,
+                              backgroundColor: (t) => t.palette.background.default,
+                              color: 'text.secondary',
+                              typography: 'caption',
+                            }}
+                          >
+                            {tag}
+                          </Box>
+                        ))}
+                      </Box>
+                    ) : null}
+                  </Stack>
+                </Link>
               </Box>
             ))}
           </Box>

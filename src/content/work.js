@@ -1,3 +1,5 @@
+import { spotifyCaseStudy } from './case-studies/spotify.js';
+
 export const workContent = {
   heading: 'Selected work',
   description:
@@ -6,25 +8,11 @@ export const workContent = {
 
 export const workItems = [
   {
-    id: 'design-systems-governance',
-    slug: 'design-systems-governance',
-    title: 'Design systems & governance',
-    summary:
-      'Building editorial-quality tokens, documentation, and accessibility guardrails for fast-moving B2B teams.',
-    tags: ['Design systems', 'Governance', 'Accessibility'],
-  },
-  {
-    id: 'complex-workflows',
-    slug: 'complex-workflows',
-    title: 'Complex workflows',
-    summary: 'Translating research and operations flows into actionable interfaces that reduce cognitive load.',
-    tags: ['Workflows', 'Operations', 'Product design'],
-  },
-  {
-    id: 'coaching-and-enablement',
-    slug: 'coaching-and-enablement',
-    title: 'Coaching & enablement',
-    summary: 'Pairing with PMs and IC designers to ship on a predictable cadence with measurable outcomes.',
-    tags: ['Coaching', 'Collaboration', 'Delivery'],
+    id: spotifyCaseStudy.id,
+    slug: spotifyCaseStudy.slug,
+    title: spotifyCaseStudy.hero.title,
+    summary: spotifyCaseStudy.meta.description,
+    tags: spotifyCaseStudy.hero.tags,
+    thumbnail: spotifyCaseStudy.hero.image?.src,
   },
 ];
