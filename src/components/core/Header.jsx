@@ -14,12 +14,8 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 import { ColorModeContext } from './AppThemeProvider';
-
-const NAV_ITEMS = [
-  { label: 'Work', href: '#work' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-];
+import { mainNav } from '../../content/navigation.js';
+import { siteMeta } from '../../content/siteMeta.js';
 
 export default function Header() {
   const theme = useTheme();
@@ -77,7 +73,7 @@ export default function Header() {
                 },
               })}
             >
-              UX Portfolio Starter
+              {siteMeta.siteName || siteMeta.title}
             </Typography>
           </Box>
 
@@ -92,7 +88,7 @@ export default function Header() {
               justifyContent: 'center',
             })}
           >
-            {NAV_ITEMS.map((item) => (
+            {mainNav.map((item) => (
               <MuiLink
                 key={item.href}
                 href={item.href}
