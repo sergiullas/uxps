@@ -28,11 +28,11 @@ const spotifyDetail = {
       'Reduced steps to access saved playlists from 4 taps to 2.',
       'Created a clear separation between “active listening” and “discovery mode.”',
     ],
-      beforeAfter: {
-        before: '/images/projects/spotify-before.svg',
-        after: '/images/projects/spotify-after.svg',
-        caption: 'Comparison of the old vs. new library layout.',
-      },
+    beforeAfter: {
+      before: '/images/projects/spotify-before.svg',
+      after: '/images/projects/spotify-after.svg',
+      caption: 'Comparison of the old vs. new library layout.',
+    },
   },
 };
 
