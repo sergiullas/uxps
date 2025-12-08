@@ -13,16 +13,30 @@ const STORAGE_KEY = 'uxps-color-mode';
 export default function AppThemeProvider({ children }) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [mode, setMode] = React.useState(() => {
-    if (typeof window === 'undefined') return 'light';
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === 'light' || stored === 'dark') return stored;
-    return prefersDarkMode ? 'dark' : 'light';
-  });
+  const [mode, setMode] = React.useState('light');
 
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
+    let initialMode = 'light';
+
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      if (stored === 'light' || stored === 'dark') {
+        initialMode = stored;
+      } else {
+        initialMode = prefersDarkMode ? 'dark' : 'light';
+      }
+    } catch (e) {
+      initialMode = prefersDarkMode ? 'dark' : 'light';
+    }
+
+    setMode(initialMode);
+  }, [prefersDarkMode]);
+
+  React.useEffect(() => {
+    try {
       window.localStorage.setItem(STORAGE_KEY, mode);
+    } catch (e) {
+      // localStorage may be unavailable; fail silently
     }
   }, [mode]);
 
