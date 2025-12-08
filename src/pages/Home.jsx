@@ -1,8 +1,15 @@
+import AppSection from '../components/ui/AppSection.jsx';
+import AppButton from '../components/ui/AppButton.jsx';
+
 export default function Home() {
   return (
-    <div style={{ padding: '2rem 1.5rem' }}>
-      <h1>Home</h1>
-      <p>UX Portfolio Starter — Phase 1 shell is working.</p>
-    </div>
+    <AppSection id="home">
+      <h1>UX Portfolio Starter — Themed</h1>
+      <p>
+        Phase 3 theme system is wired. This is a temporary sanity check and can be removed in later
+        phases.
+      </p>
+      <AppButton>Primary Action</AppButton>
+    </AppSection>
   );
 }
