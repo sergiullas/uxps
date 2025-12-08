@@ -8,8 +8,8 @@ export const siteMeta = {
   tagline: 'Designing systems, not just screens.',
   siteName: 'UX Portfolio Starter',
   bio:
-    'I am a UX designer who focuses on complex systems, workflows, and tools.\n' +
-    'I care about accessibility, long-term maintainability, and designing products teams can actually ship.',
+    `I am a UX designer who focuses on complex systems, workflows, and tools.
+I care about accessibility, long-term maintainability, and designing products teams can actually ship.`,
   email: 'sergio@portfolio.test',
   url: 'https://uxps.vercel.app/',
   social: {
