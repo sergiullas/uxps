@@ -122,8 +122,7 @@ export default function Header() {
             {NAV_ITEMS.map((item) => (
               <MuiLink
                 key={item.href}
-                component={RouterLink}
-                to={item.href}
+                href={item.href}
                 underline="none"
                 sx={(t) => ({
                   ...t.typography.nav,
