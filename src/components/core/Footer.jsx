@@ -6,6 +6,11 @@ import { footerNav } from '../../content/navigation.js';
 import { siteMeta } from '../../content/siteMeta.js';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const copyright = siteMeta.siteName
+    ? `© ${currentYear} ${siteMeta.siteName}`
+    : `© ${currentYear}`;
+
   return (
     <Box
       component="footer"
