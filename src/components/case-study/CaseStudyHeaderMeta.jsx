@@ -7,17 +7,21 @@ export default function CaseStudyHeaderMeta({ hero, compact = false }) {
   const { eyebrow, title, subtitle, tags } = hero || {};
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const transition = prefersReducedMotion ? 'none' : 'opacity 160ms ease, transform 160ms ease';
+  const transformTransition = prefersReducedMotion ? 'none' : 'transform 160ms ease';
+  const opacityTransition = prefersReducedMotion ? 'none' : 'opacity 160ms ease';
 
   return (
-    <Stack spacing={2} sx={{ transition, transform: compact ? 'translateY(-4px)' : 'none' }}>
+    <Stack
+      spacing={2}
+      sx={{ transition: transformTransition, transform: compact ? 'translateY(-4px)' : 'none' }}
+    >
       <Link component={RouterLink} to="/work" underline="hover" aria-label="Back to Work page">
         ← Back to work
       </Link>
 
       <Stack spacing={1.5}>
         {eyebrow ? (
-          <Typography variant="overline" color="text.secondary" sx={{ transition }}>
+          <Typography variant="overline" color="text.secondary">
             {eyebrow}
           </Typography>
         ) : null}
@@ -25,7 +29,6 @@ export default function CaseStudyHeaderMeta({ hero, compact = false }) {
           component="h1"
           variant="h1"
           color="text.primary"
-          sx={{ transition }}
         >
           {title}
         </Typography>
@@ -33,7 +36,7 @@ export default function CaseStudyHeaderMeta({ hero, compact = false }) {
           <Typography
             variant="subtitle1"
             color="text.secondary"
-            sx={{ maxWidth: { md: '80ch' }, opacity: compact ? 0.88 : 1, transition }}
+            sx={{ maxWidth: { md: '80ch' }, opacity: compact ? 0.88 : 1, transition: opacityTransition }}
           >
             {subtitle}
           </Typography>
@@ -46,7 +49,7 @@ export default function CaseStudyHeaderMeta({ hero, compact = false }) {
               gap: 1,
               pt: 0.5,
               opacity: compact ? 0.9 : 1,
-              transition,
+              transition: opacityTransition,
             }}
           >
             {tags.map((tag) => (

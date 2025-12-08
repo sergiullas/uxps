@@ -14,6 +14,8 @@ import { CASE_STUDIES } from '../../content/case-studies/index.js';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 import { SectionObserverProvider, useSectionObserverContext } from './SectionObserverProvider.jsx';
 
+const HEADER_CONDENSE_SCROLL_THRESHOLD = 104;
+
 export default function CaseStudyLayout({ caseStudy }) {
   const sections = caseStudy.sections || [];
 
@@ -33,17 +35,16 @@ function CaseStudyLayoutContent({ caseStudy }) {
   React.useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
-    const threshold = 104;
     let frame = null;
 
     const updateState = () => {
       frame = null;
-      setIsHeaderCondensed(window.scrollY > threshold);
+      setIsHeaderCondensed(window.scrollY > HEADER_CONDENSE_SCROLL_THRESHOLD);
     };
 
     const handleScroll = () => {
       if (prefersReducedMotion) {
-        setIsHeaderCondensed(window.scrollY > threshold);
+        setIsHeaderCondensed(window.scrollY > HEADER_CONDENSE_SCROLL_THRESHOLD);
         return;
       }
 

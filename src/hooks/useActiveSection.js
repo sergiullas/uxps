@@ -5,8 +5,8 @@ export default function useActiveSection(sections = [], entries = {}) {
     const sectionIds = sections.map((section) => section.id).filter(Boolean);
     if (!sectionIds.length) return null;
 
-    let activeSectionId = sectionIds[0];
-    let bestRatio = -1;
+    let activeSectionId = null;
+    let bestRatio = 0;
 
     sectionIds.forEach((id) => {
       const entry = entries[id];

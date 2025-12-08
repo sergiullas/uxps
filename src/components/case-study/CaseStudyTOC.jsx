@@ -17,6 +17,15 @@ export default function CaseStudyTOC({ sections = [], toc = {}, activeSectionId 
     [sectionIds, availableIds],
   );
 
+  const sectionsById = React.useMemo(
+    () =>
+      sections.reduce((acc, section) => {
+        acc[section.id] = section;
+        return acc;
+      }, {}),
+    [sections],
+  );
+
   const itemRefs = React.useRef({});
   const [indicator, setIndicator] = React.useState({ top: 0, height: 0 });
 
@@ -75,7 +84,7 @@ export default function CaseStudyTOC({ sections = [], toc = {}, activeSectionId 
           />
           {filteredIds.map((id) => {
             const isActive = id === activeSectionId;
-            const title = sections.find((section) => section.id === id)?.title || id;
+            const title = sectionsById[id]?.title || id;
 
             return (
               <Box component="li" key={id} ref={setItemRef(id)}>
