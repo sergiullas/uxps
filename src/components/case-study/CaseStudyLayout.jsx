@@ -11,16 +11,65 @@ import CaseStudyTOC from './CaseStudyTOC.jsx';
 import CaseStudyTOCMobile from './CaseStudyTOCMobile.jsx';
 import { workItems } from '../../content/work.js';
 import { CASE_STUDIES } from '../../content/case-studies/index.js';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
+import { SectionObserverProvider, useSectionObserverContext } from './SectionObserverProvider.jsx';
+
+const HEADER_CONDENSE_SCROLL_THRESHOLD = 104;
 
 export default function CaseStudyLayout({ caseStudy }) {
+  const sections = caseStudy.sections || [];
+
+  return (
+    <SectionObserverProvider sections={sections}>
+      <CaseStudyLayoutContent caseStudy={caseStudy} />
+    </SectionObserverProvider>
+  );
+}
+
+function CaseStudyLayoutContent({ caseStudy }) {
   const { hero, intro, outcomes, sections = [], toc, slug } = caseStudy;
+  const { activeSectionId } = useSectionObserverContext();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [isHeaderCondensed, setIsHeaderCondensed] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    let frame = null;
+
+    const updateState = () => {
+      frame = null;
+      setIsHeaderCondensed(window.scrollY > HEADER_CONDENSE_SCROLL_THRESHOLD);
+    };
+
+    const handleScroll = () => {
+      if (prefersReducedMotion) {
+        setIsHeaderCondensed(window.scrollY > HEADER_CONDENSE_SCROLL_THRESHOLD);
+        return;
+      }
+
+      if (frame === null) {
+        frame = window.requestAnimationFrame(updateState);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prefersReducedMotion]);
 
   return (
     <Stack spacing={{ xs: 4, md: 6 }}>
       <CaseStudyBreadcrumbs caseStudy={caseStudy} />
-      <CaseStudyHeaderMeta hero={hero} />
+      <CaseStudyHeaderMeta hero={hero} compact={isHeaderCondensed} />
 
-      <CaseStudyTOCMobile sections={sections} toc={toc} />
+      <CaseStudyTOCMobile sections={sections} toc={toc} activeSectionId={activeSectionId} />
 
       <Box
         sx={{
@@ -34,7 +83,7 @@ export default function CaseStudyLayout({ caseStudy }) {
       </Box>
 
       {toc?.enabled && sections.length > 0 ? (
-        <CaseStudyTOC sections={sections} toc={toc} />
+        <CaseStudyTOC sections={sections} toc={toc} activeSectionId={activeSectionId} />
       ) : null}
 
       <Stack component="article" spacing={{ xs: 4, md: 6 }}>
