@@ -5,21 +5,18 @@ import { Helmet } from 'react-helmet-async';
 import EditorialHero from '../components/modules/EditorialHero.jsx';
 import AppSection from '../components/ui/AppSection.jsx';
 import AppButton from '../components/ui/AppButton.jsx';
-import personal from '../content/personal.js';
-import skills from '../content/skills.js';
-import experience from '../content/experience.js';
-import education from '../content/education.js';
+import { siteMeta } from '../content/siteMeta.js';
+import { workContent, workItems } from '../content/work.js';
+import { resumeContent, experience, education, skills } from '../content/resume.js';
+import { contactContent } from '../content/contact.js';
 
 export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Sergio Antezana — UX Portfolio</title>
-        <meta
-          name="description"
-          content="Systems-minded UX designer crafting editorial-quality case studies, tools, and workflows."
-        />
-        <link rel="canonical" href="https://uxps.vercel.app/" />
+        <title>{siteMeta.title}</title>
+        <meta name="description" content={siteMeta.description} />
+        <link rel="canonical" href={siteMeta.url} />
       </Helmet>
 
       <EditorialHero />
@@ -33,11 +30,10 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="work-heading" component="h2" variant="h2" color="text.primary">
-              Selected work
+              {workContent.heading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '72ch' } }}>
-              Case studies are being refreshed for the final handoff. In the meantime, here are the focus areas and
-              outcomes guiding the next releases.
+              {workContent.description}
             </Typography>
           </Stack>
 
@@ -52,24 +48,10 @@ export default function Home() {
               gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
             }}
           >
-            {[
-              {
-                title: 'Design systems & governance',
-                detail:
-                  'Building editorial-quality tokens, documentation, and accessibility guardrails for fast-moving B2B teams.',
-              },
-              {
-                title: 'Complex workflows',
-                detail: 'Translating research and operations flows into actionable interfaces that reduce cognitive load.',
-              },
-              {
-                title: 'Coaching & enablement',
-                detail: 'Pairing with PMs and IC designers to ship on a predictable cadence with measurable outcomes.',
-              },
-            ].map((item) => (
+            {workItems.map((item) => (
               <Box
                 component="li"
-                key={item.title}
+                key={item.id}
                 sx={(t) => ({
                   border: `1px solid ${t.palette.divider}`,
                   borderRadius: t.shape.borderRadius,
@@ -82,7 +64,7 @@ export default function Home() {
                   {item.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {item.detail}
+                  {item.summary}
                 </Typography>
               </Box>
             ))}
@@ -94,17 +76,17 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="about-heading" component="h2" variant="h2" color="text.primary">
-              About
+              {siteMeta.aboutSection.heading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '70ch' } }}>
-              {personal.bio}
+              {siteMeta.bio}
             </Typography>
           </Stack>
 
           <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 3, md: 4 }}>
             <Box sx={{ minWidth: { md: '40%' } }}>
               <Typography component="h3" variant="h4" color="text.primary" sx={{ mb: 1 }}>
-                Core skills
+                {siteMeta.aboutSection.skillsHeading}
               </Typography>
               <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
                 {skills.map((skill) => (
@@ -124,10 +106,10 @@ export default function Home() {
 
             <Box sx={{ flex: 1 }}>
               <Typography component="h3" variant="h4" color="text.primary" sx={{ mb: 1 }}>
-                Location & availability
+                {siteMeta.aboutSection.locationHeading}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {personal.location} · Available for remote-friendly collaborations
+                {siteMeta.location} · {siteMeta.aboutSection.availabilityNote}
               </Typography>
             </Box>
           </Stack>
@@ -138,10 +120,10 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="resume-heading" component="h2" variant="h2" color="text.primary">
-              Resume snapshots
+              {resumeContent.heading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '72ch' } }}>
-              Highlights from recent roles and education. A detailed PDF version is available on request.
+              {resumeContent.description}
             </Typography>
           </Stack>
 
@@ -178,7 +160,7 @@ export default function Home() {
 
             <Box sx={{ mt: 1 }}>
               <Typography component="h3" variant="h4" color="text.primary" sx={{ mb: 1 }}>
-                Education
+                {resumeContent.educationHeading}
               </Typography>
               <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
                 {education.map((item) => (
@@ -205,17 +187,17 @@ export default function Home() {
       >
         <Stack spacing={{ xs: 2, md: 3 }} alignItems="flex-start">
           <Typography id="contact-heading" component="h2" variant="h2" color="text.primary">
-            Contact
+            {contactContent.heading}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Ready to collaborate or need a deeper case study? Let’s talk.
+            {contactContent.body}
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 2, sm: 2.5 }} alignItems="center">
-            <AppButton component="a" href={`mailto:${personal.email}`} color="primary">
-              Email {personal.name}
+            <AppButton component="a" href={contactContent.primaryAction.href} color="primary">
+              {contactContent.primaryAction.label}
             </AppButton>
             <Typography variant="body2" color="text.secondary">
-              Prefer async? {personal.email}
+              {contactContent.secondaryNote}
             </Typography>
           </Stack>
         </Stack>
