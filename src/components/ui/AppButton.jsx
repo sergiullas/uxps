@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
 
-export default function AppButton(props) {
-  return <Button variant="contained" disableElevation {...props} />;
-}
+export default React.forwardRef(function AppButton(props, ref) {
+  return <Button variant="contained" disableElevation {...props} ref={ref} />;
+});
