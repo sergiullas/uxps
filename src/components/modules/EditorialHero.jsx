@@ -68,7 +68,7 @@ export default function EditorialHero() {
               spacing={{ xs: 2, sm: 2.5 }}
               sx={{ alignItems: { xs: 'stretch', sm: 'center' } }}
             >
-              <AppButton component={RouterLink} to="/work" color="primary">
+              <AppButton component={RouterLink} to="/#work" color="primary">
                 View selected work
               </AppButton>
 
@@ -107,6 +107,7 @@ export default function EditorialHero() {
         </Stack>
 
         <Box
+          id="work"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -178,10 +179,8 @@ export default function EditorialHero() {
             <Typography
               component="span"
               variant="body2"
-              sx={{
-                color: theme.palette.text.primary,
-                fontWeight: 600,
-              }}
+              color="text.primary"
+              sx={{ fontWeight: 600 }}
             >
               Contact
             </Typography>
