@@ -97,7 +97,7 @@ export default function Home() {
               About
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '70ch' } }}>
-              {personal.bio.replace('\n', ' ')}
+              {personal.bio}
             </Typography>
           </Stack>
 
