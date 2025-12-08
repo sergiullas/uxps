@@ -28,33 +28,6 @@ export default function Header() {
 
   return (
     <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
-      <Box
-        component="a"
-        href="#main-content"
-        sx={(t) => ({
-          position: 'absolute',
-          left: '50%',
-          transform: 'translate(-50%, -200%)',
-          padding: t.spacing(1, 2),
-          borderRadius: t.shape.borderRadius,
-          backgroundColor: t.palette.background.paper,
-          color: t.palette.text.primary,
-          textDecoration: 'none',
-          boxShadow: t.shadows[2],
-          fontWeight: t.typography.fontWeightMedium,
-          transition: t.transitions.create(['transform', 'opacity'], {
-            duration: t.transitions.duration.shorter,
-          }),
-          opacity: 0,
-          '&:focus-visible': {
-            transform: 'translate(-50%, 20%)',
-            opacity: 1,
-          },
-        })}
-      >
-        Skip to main content
-      </Box>
-
       <AppBar
         position="sticky"
         elevation={0}
