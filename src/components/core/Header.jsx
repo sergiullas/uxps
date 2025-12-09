@@ -66,7 +66,7 @@ function HeaderNav() {
   return (
     <Box
       component="nav"
-      aria-label="Primary"
+      aria-label="Primary navigation"
       sx={(t) => ({
         display: 'flex',
         alignItems: 'center',
