@@ -2,6 +2,9 @@ export const greenStepsApp = {
   id: "greensteps-app",
   slug: "greensteps-app",
 
+  showInWork: true,
+  workOrder: 20,
+
   meta: {
     title: "Gamifying Carbon Reduction for the Eco-Conscious Commuter",
     description: "How I used behavioral psychology and gamification to increase retention by 65% in a sustainability tracking app.",

@@ -9,7 +9,7 @@ import CaseStudyRelated from './CaseStudyRelated.jsx';
 import CaseStudySection from './CaseStudySection.jsx';
 import CaseStudyTOC from './CaseStudyTOC.jsx';
 import CaseStudyTOCMobile from './CaseStudyTOCMobile.jsx';
-import { workItems } from '../../content/work.js';
+import { WORK_ITEMS } from '../../content/work.js';
 import { CASE_STUDIES } from '../../content/case-studies/index.js';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 import { SectionObserverProvider, useSectionObserverContext } from './SectionObserverProvider.jsx';
@@ -94,7 +94,7 @@ function CaseStudyLayoutContent({ caseStudy }) {
 
       <CaseStudyRelated currentCaseStudy={caseStudy} allCaseStudies={CASE_STUDIES} />
 
-      <CaseStudyFooterNav currentSlug={slug} workItems={workItems} />
+      <CaseStudyFooterNav currentSlug={slug} workItems={WORK_ITEMS} />
     </Stack>
   );
 }

@@ -12,7 +12,7 @@ export const heroContent = {
   sidebarTitle: 'Recent focus',
   primaryCta: {
     label: 'View selected work',
-    href: '/#work',
+    href: '/work',
   },
   secondaryCta: {
     label: 'View resume',

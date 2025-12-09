@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { Box, Divider, Link, Stack, Typography } from '@mui/material';
+import { Box, Divider, Stack, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import { Link as RouterLink } from 'react-router-dom';
 
 import EditorialHero from '../components/modules/EditorialHero.jsx';
 import AppSection from '../components/ui/AppSection.jsx';
 import AppButton from '../components/ui/AppButton.jsx';
+import WorkItemCard from '../components/work/WorkItemCard.jsx';
 import { siteMeta } from '../content/siteMeta.js';
-import { workContent, workItems } from '../content/work.js';
+import { WORK_ITEMS, workContent } from '../content/work.js';
 import { resumeContent, experience, education, skills } from '../content/resume.js';
 import { contactContent } from '../content/contact.js';
 
+const SELECTED_WORK_COUNT = 3;
+
 export default function Home() {
+  const selectedWork = WORK_ITEMS.slice(0, SELECTED_WORK_COUNT);
+
   return (
     <>
       <Helmet>
@@ -31,7 +35,7 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="work-heading" component="h2" variant="h2" color="text.primary">
-              {workContent.heading}
+              {workContent.selectedHeading || workContent.heading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '72ch' } }}>
               {workContent.description}
@@ -49,55 +53,9 @@ export default function Home() {
               gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
             }}
           >
-            {workItems.map((item) => (
-              <Box component="li" key={item.id}>
-                <Link
-                  component={RouterLink}
-                  to={`/work/${item.slug}`}
-                  underline="none"
-                  sx={(t) => ({
-                    display: 'block',
-                    border: `1px solid ${t.palette.divider}`,
-                    borderRadius: t.shape.borderRadius,
-                    backgroundColor: t.palette.background.paper,
-                    p: { xs: t.spacing(2.5), md: t.spacing(3) },
-                    boxShadow: t.customShadows?.card,
-                    transition: 'border-color 150ms ease, box-shadow 150ms ease',
-                    '&:hover, &:focus-visible': {
-                      borderColor: t.palette.primary.main,
-                      boxShadow: t.customShadows?.primary,
-                    },
-                  })}
-                  aria-label={`View case study: ${item.title}`}
-                >
-                  <Stack spacing={1.5}>
-                    <Typography component="h3" variant="h4" color="text.primary">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.summary}
-                    </Typography>
-                    {item.tags?.length ? (
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                        {item.tags.map((tag) => (
-                          <Box
-                            key={tag}
-                            sx={{
-                              px: 1,
-                              py: 0.5,
-                              borderRadius: 1,
-                              backgroundColor: (t) => t.palette.background.default,
-                              color: 'text.secondary',
-                              typography: 'caption',
-                            }}
-                          >
-                            {tag}
-                          </Box>
-                        ))}
-                      </Box>
-                    ) : null}
-                  </Stack>
-                </Link>
+            {selectedWork.map((item) => (
+              <Box component="li" key={item.slug}>
+                <WorkItemCard item={item} />
               </Box>
             ))}
           </Box>

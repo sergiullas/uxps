@@ -2,6 +2,9 @@ export const omniLogistics = {
   id: "omni-logistics",
   slug: "omni-logistics",
 
+  showInWork: true,
+  workOrder: 10,
+
   meta: {
     title: "Unifying Fleet Management for Enterprise Logistics",
     description: "Consolidating 14 disparate data sources into a single command center, reducing decision time by 98% for fleet managers.",
