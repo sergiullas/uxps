@@ -14,12 +14,12 @@ export default function CaseStudyHeaderMeta({ hero, compact = false, brand }) {
   return (
     <Stack
       spacing={2}
-      sx={(t) => ({
+      sx={{
         transition: transformTransition,
         transform: compact ? 'translateY(-4px)' : 'none',
         borderBottom: applyHeaderBrand ? `3px solid var(--context-primary)` : 'none',
         pb: applyHeaderBrand ? { xs: 2, md: 2.5 } : 0,
-      })}
+      }}
     >
       <Link
         component={RouterLink}

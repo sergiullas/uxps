@@ -48,4 +48,29 @@
   .resume-print-scope .MuiPaper-root {
     box-shadow: none !important;
   }
+
+  /* Hide interactive controls in Resume only */
+  .resume-print-scope .MuiTabs-root,
+  .resume-print-scope .timeline-controls,
+  .resume-print-scope .MuiToggleButtonGroup-root,
+  .resume-print-scope button,
+  .resume-print-scope .MuiIconButton-root {
+    display: none !important;
+  }
+
+  /* Show ALL tabpanels in print */
+  .resume-print-scope [role='tabpanel'] {
+    display: block !important;
+  }
+
+  /* Ensure timeline content fully expanded */
+  .resume-print-scope .MuiCollapse-root {
+    height: auto !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  .resume-print-scope .MuiCollapse-wrapper {
+    display: block !important;
+  }
 }

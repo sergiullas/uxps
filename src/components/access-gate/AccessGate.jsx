@@ -83,7 +83,6 @@ export default function AccessGate({
               ) : null}
 
               <TextField
-                autoFocus
                 fullWidth
                 label="Access password"
                 type="password"
