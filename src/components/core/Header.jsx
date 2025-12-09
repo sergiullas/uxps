@@ -200,7 +200,7 @@ export default function Header() {
   return (
     <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
       <AppBar
-        position={isSticky ? 'sticky' : 'static'}
+        position={isSticky ? 'fixed' : 'static'}
         elevation={0}
         sx={(t) => ({
           backgroundColor: t.palette.background.paper,
