@@ -26,13 +26,21 @@ function useScrollElevation(enabled) {
       return undefined;
     }
 
+    const getScrollY = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
     const handleScroll = () => {
-      setElevated(window.scrollY > 0);
+      const y = getScrollY();
+      setElevated(y > 0);
     };
 
+    // Set initial state
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [enabled]);
 
@@ -189,17 +197,17 @@ function renderHeaderSlot(slotKey) {
 }
 
 export default function Header() {
-
   const headerConfig = siteMeta.header || defaultHeader;
   const layout = { ...defaultLayout, ...(headerConfig.layout || {}) };
   const behavior = { ...defaultBehavior, ...(headerConfig.behavior || {}) };
-  const isSticky = behavior.sticky ?? true;
+  const isSticky = behavior?.sticky ?? true;
 
   const elevated = useScrollElevation(isSticky);
 
   return (
     <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
       <AppBar
+        component="header"
         position={isSticky ? 'sticky' : 'static'}
         elevation={0}
         sx={(t) => ({
@@ -213,18 +221,19 @@ export default function Header() {
           '@media (prefers-reduced-motion: reduce)': {
             transition: 'none',
           },
+          zIndex: t.zIndex.appBar,
         })}
       >
         <Toolbar
-          sx={(t) => ({
+          sx={{
             width: '100%',
             minHeight: { xs: 56, sm: 64 },
-            px: { xs: 2, md: 3 },
             display: 'grid',
             gridTemplateColumns: '1fr auto 1fr',
             alignItems: 'center',
-            columnGap: { xs: t.spacing(1.5), md: t.spacing(3) },
-          })}
+            columnGap: { xs: 1.5, md: 3 },
+            px: { xs: 2, md: 3 },
+          }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', minWidth: 0 }}>
             {renderHeaderSlot(layout.left)}
