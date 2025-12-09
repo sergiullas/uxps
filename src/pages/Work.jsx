@@ -11,7 +11,7 @@ export default function Work() {
     <>
       <Helmet>
         <title>{`${workContent.heading} | ${siteMeta.title}`}</title>
-        <meta name="description" content={siteMeta.description} />
+        <meta name="description" content={workContent.description} />
         <link rel="canonical" href={`${siteMeta.url}/work`} />
       </Helmet>
 

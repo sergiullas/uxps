@@ -32,9 +32,9 @@ export default function WorkItemCard({ item, headingLevel = 'h3' }) {
         </Typography>
         {item.tags?.length ? (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {item.tags.map((tag) => (
+            {item.tags.map((tag, index) => (
               <Box
-                key={tag}
+                key={`${tag}-${index}`}
                 sx={{
                   px: 1,
                   py: 0.5,

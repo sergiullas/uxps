@@ -3,6 +3,8 @@
 
 import { CASE_STUDIES } from './case-studies/index.js';
 
+const DEFAULT_WORK_ORDER = 999; // default: push to end
+
 export const workContent = {
   heading: 'Work',
   selectedHeading: 'Selected work',
@@ -12,7 +14,7 @@ export const workContent = {
 
 function getWorkOrder(cs) {
   if (typeof cs.workOrder === 'number') return cs.workOrder;
-  return 999; // default: push to end
+  return DEFAULT_WORK_ORDER;
 }
 
 export const WORK_ITEMS = CASE_STUDIES
@@ -28,4 +30,6 @@ export const WORK_ITEMS = CASE_STUDIES
     summary: cs.hero?.subtitle || cs.meta?.description,
     tags: cs.hero?.tags || [],
     image: cs.hero?.image?.src || null,
+    // Temporary alias for downstream consumers that still expect `thumbnail`
+    thumbnail: cs.hero?.image?.src || null,
   }));

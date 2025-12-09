@@ -11,8 +11,10 @@ import { WORK_ITEMS, workContent } from '../content/work.js';
 import { resumeContent, experience, education, skills } from '../content/resume.js';
 import { contactContent } from '../content/contact.js';
 
+const SELECTED_WORK_COUNT = 3;
+
 export default function Home() {
-  const selectedWork = WORK_ITEMS.slice(0, 3);
+  const selectedWork = WORK_ITEMS.slice(0, SELECTED_WORK_COUNT);
 
   return (
     <>
