@@ -21,7 +21,10 @@ function useScrollElevation(enabled) {
   const [elevated, setElevated] = React.useState(false);
 
   React.useEffect(() => {
-    if (!enabled) return undefined;
+    if (!enabled) {
+      setElevated(false);
+      return undefined;
+    }
 
     const handleScroll = () => {
       setElevated(window.scrollY > 0);
