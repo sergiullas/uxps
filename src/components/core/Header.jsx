@@ -200,7 +200,7 @@ export default function Header() {
     <AppBar
       component="header"
       position={isSticky ? 'sticky' : 'static'}
-      data-elevated={elevated ? 'true' : 'false'}
+      data-elevated={elevated}
       elevation={0}
       sx={(t) => ({
         top: 0,
