@@ -27,8 +27,8 @@ export default function ResumeSummary({ summary }) {
 
       {highlights.length ? (
         <Box component="ul" sx={{ mt: 2, pl: 3, m: 0, display: 'grid', gap: 1 }}>
-          {highlights.map((item) => (
-            <Box component="li" key={item}>
+          {highlights.map((item, index) => (
+            <Box component="li" key={index}>
               <Typography variant="body1" color="text.secondary">
                 {item}
               </Typography>

@@ -27,8 +27,8 @@ export default function ResumeEducation({ education }) {
             </Typography>
             {item.details?.length ? (
               <Box component="ul" sx={{ mt: 1, pl: 2.75, m: 0, display: 'grid', gap: 0.5 }}>
-                {item.details.map((detail) => (
-                  <Box key={detail} component="li">
+                {item.details.map((detail, index) => (
+                  <Box key={index} component="li">
                     <Typography variant="body2" color="text.secondary">
                       {detail}
                     </Typography>
