@@ -58,13 +58,13 @@ export default function CaseStudyTOCMobile({ sections = [], toc = {}, activeSect
                   <Link
                     href={`#${id}`}
                     underline="hover"
-                    color={isActive ? 'text.primary' : 'primary'}
                     aria-current={isActive ? 'location' : undefined}
                     sx={(t) => ({
                       display: 'block',
                       fontWeight: isActive ? 700 : 600,
                       px: 0.5,
                       py: 0.75,
+                      color: isActive ? 'var(--context-primary)' : t.palette.text.secondary,
                       borderRadius: t.shape.borderRadius,
                       backgroundColor: isActive ? t.palette.action.hover : 'transparent',
                     })}

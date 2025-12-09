@@ -91,7 +91,7 @@ export default function CaseStudyTOC({ sections = [], toc = {}, activeSectionId 
                 <Link
                   href={`#${id}`}
                   underline="none"
-                  color={isActive ? 'text.primary' : 'text.secondary'}
+                  color={isActive ? 'var(--context-primary)' : 'text.secondary'}
                   aria-current={isActive ? 'location' : undefined}
                   sx={(t) => ({
                     display: 'block',
@@ -100,6 +100,9 @@ export default function CaseStudyTOC({ sections = [], toc = {}, activeSectionId 
                     fontWeight: isActive ? 700 : 600,
                     borderRadius: t.shape.borderRadius,
                     backgroundColor: isActive ? t.palette.action.hover : 'transparent',
+                    '&:hover': {
+                      color: 'var(--context-primary)',
+                    },
                     transition: prefersReducedMotion
                       ? 'none'
                       : 'color 120ms ease, background-color 120ms ease',

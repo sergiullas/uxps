@@ -5,7 +5,7 @@ function DetailItem({ label, value }) {
   if (!value) return null;
   return (
     <Box component="div">
-      <Typography variant="overline" color="text.secondary">
+      <Typography variant="overline" color="var(--context-accent)">
         {label}
       </Typography>
       <Typography variant="body1" color="text.primary">
@@ -38,7 +38,7 @@ export default function CaseStudyIntro({ intro = {} }) {
 
       {responsibilities.length ? (
         <Box>
-          <Typography variant="overline" color="text.secondary">
+          <Typography variant="overline" color="var(--context-accent)">
             Responsibilities
           </Typography>
           <Box component="ul" sx={{ m: 0, mt: 0.5, pl: 3 }}>

@@ -1,0 +1,51 @@
+@media print {
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .resume-print-scope,
+  .resume-print-scope * {
+    visibility: visible;
+  }
+
+  .resume-print-scope {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 1.25in 1in;
+    color: #111;
+  }
+
+  .resume-print-scope a {
+    text-decoration: underline;
+    color: #111;
+  }
+
+  .resume-print-scope h1,
+  .resume-print-scope h2,
+  .resume-print-scope h3 {
+    break-after: avoid;
+    color: #111;
+  }
+
+  .resume-print-scope p,
+  .resume-print-scope li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .resume-print-card {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  .resume-print-scope .MuiPaper-root {
+    box-shadow: none !important;
+  }
+}

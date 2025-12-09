@@ -5,7 +5,7 @@ export default function CaseStudySectionHeader({ eyebrow, title, kicker }) {
   return (
     <Stack spacing={0.75}>
       {eyebrow ? (
-        <Typography variant="overline" color="text.secondary">
+        <Typography variant="overline" color="var(--context-accent)">
           {eyebrow}
         </Typography>
       ) : null}

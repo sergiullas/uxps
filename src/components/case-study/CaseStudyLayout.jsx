@@ -16,17 +16,17 @@ import { SectionObserverProvider, useSectionObserverContext } from './SectionObs
 
 const HEADER_CONDENSE_SCROLL_THRESHOLD = 104;
 
-export default function CaseStudyLayout({ caseStudy }) {
+export default function CaseStudyLayout({ caseStudy, brand }) {
   const sections = caseStudy.sections || [];
 
   return (
     <SectionObserverProvider sections={sections}>
-      <CaseStudyLayoutContent caseStudy={caseStudy} />
+      <CaseStudyLayoutContent caseStudy={caseStudy} brand={brand} />
     </SectionObserverProvider>
   );
 }
 
-function CaseStudyLayoutContent({ caseStudy }) {
+function CaseStudyLayoutContent({ caseStudy, brand }) {
   const { hero, intro, outcomes, sections = [], toc, slug } = caseStudy;
   const { activeSectionId } = useSectionObserverContext();
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -67,7 +67,7 @@ function CaseStudyLayoutContent({ caseStudy }) {
   return (
     <Stack spacing={{ xs: 4, md: 6 }}>
       <CaseStudyBreadcrumbs caseStudy={caseStudy} />
-      <CaseStudyHeaderMeta hero={hero} compact={isHeaderCondensed} />
+      <CaseStudyHeaderMeta hero={hero} compact={isHeaderCondensed} brand={brand} />
 
       <CaseStudyTOCMobile sections={sections} toc={toc} activeSectionId={activeSectionId} />
 

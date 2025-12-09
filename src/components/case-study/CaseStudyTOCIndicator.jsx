@@ -14,7 +14,7 @@ export default function CaseStudyTOCIndicator({ top = 0, height = 0, isVisible =
         top: 0,
         width: 3,
         borderRadius: t.shape.borderRadius,
-        backgroundColor: t.palette.primary.main,
+        backgroundColor: 'var(--context-primary)',
         height,
         transform: `translateY(${top}px)`,
         opacity: isVisible ? 1 : 0,
