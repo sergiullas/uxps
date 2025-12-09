@@ -177,6 +177,10 @@ const HEADER_SLOT_COMPONENTS = {
   utils: HeaderUtils,
 };
 
+const defaultLayout = { left: 'nav', center: 'brand', right: 'utils' };
+const defaultBehavior = { sticky: true };
+const defaultHeader = { layout: defaultLayout, behavior: defaultBehavior };
+
 function renderHeaderSlot(slotKey) {
   if (!slotKey) return null;
   const Component = HEADER_SLOT_COMPONENTS[slotKey];
@@ -185,9 +189,6 @@ function renderHeaderSlot(slotKey) {
 }
 
 export default function Header() {
-  const defaultLayout = { left: 'nav', center: 'brand', right: 'utils' };
-  const defaultBehavior = { sticky: true };
-  const defaultHeader = { layout: defaultLayout, behavior: defaultBehavior };
 
   const headerConfig = siteMeta.header || defaultHeader;
   const layout = { ...defaultLayout, ...(headerConfig.layout || {}) };
