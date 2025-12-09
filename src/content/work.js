@@ -29,7 +29,3 @@ export const WORK_ITEMS = CASE_STUDIES
     tags: cs.hero?.tags || [],
     image: cs.hero?.image?.src || null,
   }));
-
-export function getWorkItemBySlug(slug) {
-  return WORK_ITEMS.find((item) => item.slug === slug) || null;
-}
