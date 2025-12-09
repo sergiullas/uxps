@@ -1,3 +1,38 @@
+export const resumeConfig = {
+  pronunciation: {
+    enabled: true,
+    sources: [
+      {
+        src: '/audio/name-pronunciation-en.mp3',
+        type: 'audio/mpeg',
+        label: 'English',
+        flag: 'US',
+      },
+      {
+        src: '/audio/name-pronunciation-es.mp3',
+        type: 'audio/mpeg',
+        label: 'Español',
+        flag: 'ES',
+      },
+    ],
+  },
+  recruiterEssentials: {
+    show: true,
+  },
+  miniMap: {
+    enabled: true,
+  },
+};
+
+export const resumeSections = [
+  { id: 'summary', label: 'Summary' },
+  { id: 'recruiter-essentials', label: 'Recruiter essentials' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'education', label: 'Education' },
+  { id: 'certifications', label: 'Certifications' },
+];
+
 export const RESUME = {
   summary: {
     intro: [
@@ -8,6 +43,16 @@ export const RESUME = {
       'Shipped workflow automation, internal tooling, and design system initiatives for enterprise-scale teams.',
       'Partnered closely with engineering and PM to deliver on 6-week release cadences while protecting UX quality.',
       'Mentored designers and drove research programs that improved adoption and reduced time-to-value.',
+    ],
+  },
+  recruiterEssentials: {
+    location: 'Seattle, WA (Remote-friendly)',
+    focus: 'Principal / Staff Product Design',
+    availability: '2–4 weeks',
+    collaboration: 'Product, engineering, and research leaders',
+    links: [
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/sergioantezana/' },
+      { label: 'Email', url: 'mailto:hello@sergioantezana.com' },
     ],
   },
   experience: {
@@ -71,6 +116,26 @@ export const RESUME = {
         location: 'City, Country',
         timeframeLabel: '2012–2016',
         details: ['Graduated with honors', 'Focused on interaction design and research methods'],
+      },
+    ],
+  },
+  certifications: {
+    items: [
+      {
+        id: 'ux-certification',
+        title: 'UX Certification',
+        issuer: 'Design Institute',
+        timeframeLabel: 'Issued 2020',
+        verificationUrl: 'https://example.com/verify/ux-cert',
+        description: 'Validated advanced UX research and prototyping skills.',
+      },
+      {
+        id: 'product-strategy-certificate',
+        title: 'Product Strategy Certificate',
+        issuer: 'PM Academy',
+        timeframeLabel: 'Issued 2019',
+        isVerified: true,
+        description: 'Coursework covering discovery, prioritization, and go-to-market readiness.',
       },
     ],
   },

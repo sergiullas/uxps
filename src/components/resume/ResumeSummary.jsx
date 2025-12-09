@@ -6,7 +6,7 @@ export default function ResumeSummary({ summary }) {
   const highlights = summary?.highlights || [];
 
   return (
-    <Box component="section" aria-labelledby="resume-summary-heading">
+    <Box component="section" aria-labelledby="resume-summary-heading" id="summary">
       <Typography
         id="resume-summary-heading"
         component="h2"
