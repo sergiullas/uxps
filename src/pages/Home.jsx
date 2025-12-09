@@ -7,11 +7,13 @@ import EditorialHero from '../components/modules/EditorialHero.jsx';
 import AppSection from '../components/ui/AppSection.jsx';
 import AppButton from '../components/ui/AppButton.jsx';
 import { siteMeta } from '../content/siteMeta.js';
-import { workContent, workItems } from '../content/work.js';
+import { WORK_ITEMS, workContent } from '../content/work.js';
 import { resumeContent, experience, education, skills } from '../content/resume.js';
 import { contactContent } from '../content/contact.js';
 
 export default function Home() {
+  const selectedWork = WORK_ITEMS.slice(0, 3);
+
   return (
     <>
       <Helmet>
@@ -31,7 +33,7 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="work-heading" component="h2" variant="h2" color="text.primary">
-              {workContent.heading}
+              {workContent.selectedHeading || workContent.heading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '72ch' } }}>
               {workContent.description}
@@ -49,8 +51,8 @@ export default function Home() {
               gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
             }}
           >
-            {workItems.map((item) => (
-              <Box component="li" key={item.id}>
+            {selectedWork.map((item) => (
+              <Box component="li" key={item.slug}>
                 <Link
                   component={RouterLink}
                   to={`/work/${item.slug}`}

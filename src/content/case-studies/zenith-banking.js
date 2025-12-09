@@ -2,6 +2,9 @@ export const zenithBanking = {
   id: "zenith-banking",
   slug: "zenith-banking",
 
+  showInWork: true,
+  workOrder: 40,
+
   meta: {
     title: "Redefining Trust for the Digital-First Banking Era",
     description: "A complete rebrand and web redesign that increased landing page conversion by 22% for a legacy financial institution.",

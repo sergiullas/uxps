@@ -1,6 +1,9 @@
 export const spotifyCaseStudy = {
   id: 'spotify-redesign',
   slug: 'spotify-redesign',
+
+  showInWork: true,
+  workOrder: 30,
   meta: {
     title: 'Spotify Mobile Experience Redesign',
     description:
