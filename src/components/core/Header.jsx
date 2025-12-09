@@ -66,7 +66,7 @@ function HeaderNav() {
   return (
     <Box
       component="nav"
-      aria-label="Primary navigation"
+      aria-label="Primary"
       sx={(t) => ({
         display: 'flex',
         alignItems: 'center',
@@ -185,10 +185,11 @@ function renderHeaderSlot(slotKey) {
 }
 
 export default function Header() {
-  const headerConfig = siteMeta.header || {};
   const defaultLayout = { left: 'nav', center: 'brand', right: 'utils' };
   const defaultBehavior = { sticky: true };
+  const defaultHeader = { layout: defaultLayout, behavior: defaultBehavior };
 
+  const headerConfig = siteMeta.header || defaultHeader;
   const layout = { ...defaultLayout, ...(headerConfig.layout || {}) };
   const behavior = { ...defaultBehavior, ...(headerConfig.behavior || {}) };
   const isSticky = behavior.sticky ?? true;
@@ -200,10 +201,8 @@ export default function Header() {
       <AppBar
         position={isSticky ? 'sticky' : 'static'}
         elevation={0}
-        color="transparent"
         sx={(t) => ({
-          backgroundColor: alpha(t.palette.background.default, 0.9),
-          backdropFilter: 'blur(12px)',
+          backgroundColor: t.palette.background.paper,
           borderBottom: '1px solid transparent',
           transition: t.transitions.create(['box-shadow', 'border-color'], {
             duration: t.transitions.duration.shorter,
@@ -217,15 +216,9 @@ export default function Header() {
       >
         <Toolbar
           sx={(t) => ({
-            mx: 'auto',
             width: '100%',
-            maxWidth: 1200,
             minHeight: { xs: 56, sm: 64 },
-            px: {
-              xs: t.spacing(2),
-              sm: t.spacing(3),
-              md: t.spacing(4),
-            },
+            px: { xs: 2, md: 3 },
             display: 'grid',
             gridTemplateColumns: '1fr auto 1fr',
             alignItems: 'center',
