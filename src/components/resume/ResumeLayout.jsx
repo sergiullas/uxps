@@ -11,6 +11,7 @@ import ResumePronunciation from './ResumePronunciation.jsx';
 import ResumeMiniMap from './ResumeMiniMap.jsx';
 import { resumeConfig } from '../../content/resume.js';
 import { siteMeta } from '../../content/siteMeta.js';
+import { SlideUpOnScroll } from '../../lib/motion/index.js';
 
 function ExperienceSection({ resumeData }) {
   const roles = React.useMemo(() => resumeData?.experience?.roles || [], [resumeData]);
@@ -138,12 +139,24 @@ export default function ResumeLayout({ resumeData }) {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <ResumeHeader description={metaDescription} />
           <Divider />
-          <ResumeSummary summary={resumeData.summary} />
-          <RecruiterEssentialsSection essentials={resumeData.recruiterEssentials} />
-          <ExperienceSection resumeData={resumeData} />
-          <ResumeSkills skills={resumeData.skills} />
-          <ResumeEducation education={resumeData.education} />
-          <ResumeCertifications certifications={resumeData.certifications} />
+          <SlideUpOnScroll>
+            <ResumeSummary summary={resumeData.summary} />
+          </SlideUpOnScroll>
+          <SlideUpOnScroll>
+            <RecruiterEssentialsSection essentials={resumeData.recruiterEssentials} />
+          </SlideUpOnScroll>
+          <SlideUpOnScroll>
+            <ExperienceSection resumeData={resumeData} />
+          </SlideUpOnScroll>
+          <SlideUpOnScroll>
+            <ResumeSkills skills={resumeData.skills} />
+          </SlideUpOnScroll>
+          <SlideUpOnScroll>
+            <ResumeEducation education={resumeData.education} />
+          </SlideUpOnScroll>
+          <SlideUpOnScroll>
+            <ResumeCertifications certifications={resumeData.certifications} />
+          </SlideUpOnScroll>
         </Stack>
       </Box>
     </Container>

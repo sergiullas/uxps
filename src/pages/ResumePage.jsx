@@ -4,6 +4,7 @@ import ResumeLayout from '../components/resume/ResumeLayout.jsx';
 import { RESUME } from '../content/resume.js';
 import { siteMeta } from '../content/siteMeta.js';
 import '../styles/print-resume.css';
+import { MotionErrorBoundary } from '../lib/motion/index.js';
 
 export default function ResumePage() {
   const metaDescription = RESUME.summary?.intro?.[0] || 'Resume overview';
@@ -16,7 +17,9 @@ export default function ResumePage() {
         <link rel="canonical" href={`${siteMeta.url}/resume`} />
       </Helmet>
 
-      <ResumeLayout resumeData={RESUME} />
+      <MotionErrorBoundary>
+        <ResumeLayout resumeData={RESUME} />
+      </MotionErrorBoundary>
     </>
   );
 }

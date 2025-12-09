@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createEditorialTheme } from '../../styles/createEditorialTheme.js';
+import { MotionProvider } from '../../lib/motion/index.js';
 
 export const ColorModeContext = React.createContext({
   mode: 'light',
@@ -51,8 +52,10 @@ export default function AppThemeProvider({ children }) {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
+        <MotionProvider>
+          <CssBaseline />
+          {children}
+        </MotionProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

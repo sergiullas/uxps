@@ -11,10 +11,17 @@ import {
 } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { useTheme } from '@mui/material/styles';
+import { getMotionComponent, useMotionConfig } from '../../lib/motion/index.js';
 
 export default function CertificationCard({ certification }) {
   const { title, issuer, timeframeLabel, verificationUrl, isVerified, description } = certification;
   const showVerification = Boolean(verificationUrl || isVerified);
+  const theme = useTheme();
+  const { prefersReducedMotion, motion } = useMotionConfig();
+  const MotionCard = getMotionComponent(Card);
+  const hoverShadow = theme.shadows[4];
+  const transition = { duration: motion?.durations?.xshort ?? 0.12 };
 
   const cardContent = (
     <CardContent>
@@ -56,11 +63,14 @@ export default function CertificationCard({ certification }) {
   );
 
   if (verificationUrl) {
+    const CardComponent = prefersReducedMotion ? Card : MotionCard;
     return (
-      <Card
+      <CardComponent
         variant="outlined"
         className="resume-print-card"
         sx={{ borderRadius: 2, transition: (t) => t.transitions.create(['box-shadow', 'transform'], { duration: t.transitions.duration.shorter }) }}
+        whileHover={prefersReducedMotion ? undefined : { y: -2, boxShadow: hoverShadow }}
+        transition={prefersReducedMotion ? undefined : transition}
       >
         <CardActionArea
           component="a"
@@ -77,17 +87,20 @@ export default function CertificationCard({ certification }) {
             </Typography>
           </Box>
         </CardActionArea>
-      </Card>
+      </CardComponent>
     );
   }
 
+  const CardComponent = prefersReducedMotion ? Card : MotionCard;
   return (
-    <Card
+    <CardComponent
       variant="outlined"
       className="resume-print-card"
       sx={{ borderRadius: 2, transition: (t) => t.transitions.create(['box-shadow', 'transform'], { duration: t.transitions.duration.shorter }) }}
+      whileHover={prefersReducedMotion ? undefined : { y: -2, boxShadow: hoverShadow }}
+      transition={prefersReducedMotion ? undefined : transition}
     >
       {cardContent}
-    </Card>
+    </CardComponent>
   );
 }
