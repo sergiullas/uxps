@@ -5,7 +5,7 @@ export default function ResumeSkills({ skills }) {
   const clusters = skills?.clusters || [];
 
   return (
-    <Box component="section" aria-labelledby="resume-skills-heading">
+    <Box component="section" aria-labelledby="resume-skills-heading" id="skills">
       <Typography
         id="resume-skills-heading"
         component="h2"

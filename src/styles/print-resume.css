@@ -54,7 +54,9 @@
   .resume-print-scope .timeline-controls,
   .resume-print-scope .MuiToggleButtonGroup-root,
   .resume-print-scope button,
-  .resume-print-scope .MuiIconButton-root {
+  .resume-print-scope .MuiIconButton-root,
+  .resume-print-scope .resume-pronunciation,
+  .resume-print-scope .resume-mini-map {
     display: none !important;
   }
 

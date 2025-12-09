@@ -105,7 +105,7 @@ function ExperiencePanel({ resumeData }) {
   );
 
   return (
-    <Box component="section" aria-labelledby="resume-experience-heading">
+    <Box component="section" aria-labelledby="resume-experience-heading" id="experience">
       <Typography
         id="resume-experience-heading"
         component="h2"
