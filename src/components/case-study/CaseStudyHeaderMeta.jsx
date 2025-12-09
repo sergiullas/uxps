@@ -3,25 +3,37 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Chip, Link, Stack, Typography } from '@mui/material';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
-export default function CaseStudyHeaderMeta({ hero, compact = false }) {
+export default function CaseStudyHeaderMeta({ hero, compact = false, brand }) {
   const { eyebrow, title, subtitle, tags } = hero || {};
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const transformTransition = prefersReducedMotion ? 'none' : 'transform 160ms ease';
   const opacityTransition = prefersReducedMotion ? 'none' : 'opacity 160ms ease';
+  const applyHeaderBrand = brand?.applyToHeader;
 
   return (
     <Stack
       spacing={2}
-      sx={{ transition: transformTransition, transform: compact ? 'translateY(-4px)' : 'none' }}
+      sx={(t) => ({
+        transition: transformTransition,
+        transform: compact ? 'translateY(-4px)' : 'none',
+        borderBottom: applyHeaderBrand ? `3px solid var(--context-primary)` : 'none',
+        pb: applyHeaderBrand ? { xs: 2, md: 2.5 } : 0,
+      })}
     >
-      <Link component={RouterLink} to="/work" underline="hover" aria-label="Back to Work page">
+      <Link
+        component={RouterLink}
+        to="/work"
+        underline="hover"
+        aria-label="Back to Work page"
+        sx={{ color: applyHeaderBrand ? 'var(--context-primary)' : undefined }}
+      >
         ← Back to work
       </Link>
 
       <Stack spacing={1.5}>
         {eyebrow ? (
-          <Typography variant="overline" color="text.secondary">
+          <Typography variant="overline" color={applyHeaderBrand ? 'var(--context-accent)' : 'text.secondary'}>
             {eyebrow}
           </Typography>
         ) : null}

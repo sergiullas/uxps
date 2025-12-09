@@ -7,6 +7,10 @@ import SEOHead from '../SEOHead.jsx';
 import CaseStudyLayout from './CaseStudyLayout.jsx';
 import CaseStudyNotFound from './CaseStudyNotFound.jsx';
 import { validateCaseStudy } from '../../utils/validateCaseStudy.js';
+import { normalizeBrand } from '../../utils/normalizeBrand.js';
+import ContextualBrandProvider from '../branding/ContextualBrandProvider.jsx';
+import AccessGate from '../access-gate/AccessGate.jsx';
+import useAccessGate from '../access-gate/useAccessGate.js';
 
 export default function CaseStudyRoute() {
   const { slug } = useParams();
@@ -25,6 +29,11 @@ export default function CaseStudyRoute() {
   }
 
   const { meta, hero } = caseStudy;
+  const brand = normalizeBrand(caseStudy.brand);
+  const gateConfig = caseStudy.accessGate;
+  const gateHash = gateConfig?.passwordHash;
+  const isGateEnabled = Boolean(gateConfig?.enabled && gateHash);
+  const { unlocked, attempt } = useAccessGate(caseStudy.slug, gateHash);
 
   if (import.meta.env.DEV) {
     validateCaseStudy(caseStudy);
@@ -37,9 +46,20 @@ export default function CaseStudyRoute() {
         description={meta?.description}
         ogImage={meta?.ogImage}
       />
-      <Container maxWidth="lg" component="main" sx={{ py: { xs: 6, md: 8 } }}>
-        <CaseStudyLayout caseStudy={caseStudy} />
-      </Container>
+      <ContextualBrandProvider brand={brand}>
+        <AccessGate
+          enabled={isGateEnabled}
+          unlocked={unlocked}
+          onAttempt={attempt}
+          title={gateConfig?.title}
+          description={gateConfig?.description}
+          hint={gateConfig?.hint}
+        >
+          <Container maxWidth="lg" component="main" sx={{ py: { xs: 6, md: 8 } }}>
+            <CaseStudyLayout caseStudy={caseStudy} brand={brand} />
+          </Container>
+        </AccessGate>
+      </ContextualBrandProvider>
     </>
   );
 }

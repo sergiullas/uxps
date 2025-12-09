@@ -43,7 +43,7 @@ export default function CaseStudyOutcomes({ outcomes = {} }) {
                   backgroundColor: t.palette.background.default,
                 })}
               >
-                <Typography variant="overline" color="text.secondary">
+                <Typography variant="overline" color="var(--context-accent)">
                   {metric.label}
                 </Typography>
                 <Typography variant="h6" color="text.primary">
@@ -61,7 +61,7 @@ export default function CaseStudyOutcomes({ outcomes = {} }) {
 
         {highlights.length ? (
           <Box>
-            <Typography variant="overline" color="text.secondary">
+            <Typography variant="overline" color="var(--context-accent)">
               Highlights
             </Typography>
             <Box component="ul" sx={{ m: 0, mt: 0.5, pl: 3 }}>

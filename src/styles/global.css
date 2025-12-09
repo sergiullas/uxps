@@ -1,5 +1,14 @@
+:root {
+  --context-primary: #2D7A6E;
+  --context-accent: #2D7A6E;
+  --context-transition: 250ms ease-out;
+}
+
 * {
   box-sizing: border-box;
+  transition: color var(--context-transition),
+              background-color var(--context-transition),
+              border-color var(--context-transition);
 }
 
 :focus-visible {
@@ -43,4 +52,10 @@ a {
 
 main {
   min-height: 60vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --context-transition: 0ms;
+  }
 }

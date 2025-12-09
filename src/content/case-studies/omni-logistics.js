@@ -2,6 +2,12 @@ export const omniLogistics = {
   id: "omni-logistics",
   slug: "omni-logistics",
 
+  brand: {
+    primaryColor: "#1f6feb",
+    accentColor: "#0ea5e9",
+    applyToHeader: false,
+  },
+
   showInWork: true,
   workOrder: 10,
 
