@@ -17,6 +17,16 @@ export const siteMeta = {
     github: 'https://github.com/sergioantezana',
     website: 'https://uxps.vercel.app',
   },
+  header: {
+    layout: {
+      left: 'nav',
+      center: 'brand',
+      right: 'utils',
+    },
+    behavior: {
+      sticky: true,
+    },
+  },
   footer: {
     copyright: `© ${new Date().getFullYear()} UX Portfolio Starter`,
     tagline: 'Designing systems, not just screens.',
