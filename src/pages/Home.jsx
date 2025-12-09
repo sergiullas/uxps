@@ -8,13 +8,17 @@ import AppButton from '../components/ui/AppButton.jsx';
 import WorkItemCard from '../components/work/WorkItemCard.jsx';
 import { siteMeta } from '../content/siteMeta.js';
 import { WORK_ITEMS, workContent } from '../content/work.js';
-import { resumeContent, experience, education, skills } from '../content/resume.js';
+import { RESUME } from '../content/resume.js';
 import { contactContent } from '../content/contact.js';
 
 const SELECTED_WORK_COUNT = 3;
 
 export default function Home() {
   const selectedWork = WORK_ITEMS.slice(0, SELECTED_WORK_COUNT);
+  const resumeData = RESUME;
+  const resumeHeading = 'Resume snapshots';
+  const resumeDescription = resumeData.summary?.intro?.[0] ||
+    'Highlights from recent roles and education.';
 
   return (
     <>
@@ -79,13 +83,13 @@ export default function Home() {
                 {siteMeta.aboutSection.skillsHeading}
               </Typography>
               <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {skills.map((skill) => (
+                {resumeData.skills.clusters.map((skill) => (
                   <Box component="li" key={skill.id}>
                     <Typography variant="body1" color="text.primary" sx={{ fontWeight: 600 }}>
                       {skill.label}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {skill.items.join(', ')}
+                      {skill.skills.map((item) => item.name).join(', ')}
                     </Typography>
                   </Box>
                 ))}
@@ -110,15 +114,15 @@ export default function Home() {
         <Stack spacing={{ xs: 3, md: 4 }}>
           <Stack spacing={1.5}>
             <Typography id="resume-heading" component="h2" variant="h2" color="text.primary">
-              {resumeContent.heading}
+              {resumeHeading}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ maxWidth: { md: '72ch' } }}>
-              {resumeContent.description}
+              {resumeDescription}
             </Typography>
           </Stack>
 
           <Stack spacing={{ xs: 2.5, md: 3 }}>
-            {experience.map((role) => (
+            {resumeData.experience.roles.map((role) => (
               <Box
                 key={role.id}
                 sx={(t) => ({
@@ -130,13 +134,13 @@ export default function Home() {
               >
                 <Stack spacing={0.5}>
                   <Typography component="h3" variant="h4" color="text.primary">
-                    {role.role} · {role.company}
+                    {role.title} · {role.company}
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    {role.start} – {role.end} · {role.location}
+                    {role.timeframeLabel} · {role.location}
                   </Typography>
                   <Box component="ul" sx={{ m: 0, mt: 1, pl: 3 }}>
-                    {role.highlights.map((highlight) => (
+                    {role.bullets.map((highlight) => (
                       <Box component="li" key={highlight}>
                         <Typography variant="body2" color="text.secondary">
                           {highlight}
@@ -150,16 +154,16 @@ export default function Home() {
 
             <Box sx={{ mt: 1 }}>
               <Typography component="h3" variant="h4" color="text.primary" sx={{ mb: 1 }}>
-                {resumeContent.educationHeading}
+                Education
               </Typography>
               <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {education.map((item) => (
+                {resumeData.education.items.map((item) => (
                   <Box key={item.id} component="li">
                     <Typography variant="body1" color="text.primary" sx={{ fontWeight: 600 }}>
                       {item.degree}, {item.school}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {item.start} – {item.end} · {item.location}
+                      {item.timeframeLabel} · {item.location}
                     </Typography>
                   </Box>
                 ))}

@@ -15,6 +15,9 @@ import useAccessGate from '../access-gate/useAccessGate.js';
 export default function CaseStudyRoute() {
   const { slug } = useParams();
   const caseStudy = getCaseStudyBySlug(slug);
+  const gateConfig = caseStudy?.accessGate;
+  const gateHash = gateConfig?.passwordHash;
+  const { unlocked, attempt } = useAccessGate(caseStudy?.slug, gateHash);
 
   if (!caseStudy) {
     return (
@@ -30,10 +33,7 @@ export default function CaseStudyRoute() {
 
   const { meta, hero } = caseStudy;
   const brand = normalizeBrand(caseStudy.brand);
-  const gateConfig = caseStudy.accessGate;
-  const gateHash = gateConfig?.passwordHash;
   const isGateEnabled = Boolean(gateConfig?.enabled && gateHash);
-  const { unlocked, attempt } = useAccessGate(caseStudy.slug, gateHash);
 
   if (import.meta.env.DEV) {
     validateCaseStudy(caseStudy);
