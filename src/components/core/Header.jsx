@@ -26,13 +26,21 @@ function useScrollElevation(enabled) {
       return undefined;
     }
 
+    const getScrollY = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
     const handleScroll = () => {
-      setElevated(window.scrollY > 0);
+      const y = getScrollY();
+      setElevated(y > 0);
     };
 
+    // initial state
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [enabled]);
 
@@ -198,9 +206,11 @@ export default function Header() {
   const elevated = useScrollElevation(isSticky);
 
   return (
-    <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
+    <Box sx={{ position: 'relative' }}>
       <AppBar
+        component="header"
         position={isSticky ? 'sticky' : 'static'}
+        data-elevated={elevated ? 'true' : 'false'}
         elevation={0}
         sx={(t) => ({
           backgroundColor: t.palette.background.paper,
@@ -213,6 +223,7 @@ export default function Header() {
           '@media (prefers-reduced-motion: reduce)': {
             transition: 'none',
           },
+          zIndex: t.zIndex.appBar,
         })}
       >
         <Toolbar
