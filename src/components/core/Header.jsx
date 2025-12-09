@@ -189,7 +189,6 @@ function renderHeaderSlot(slotKey) {
 }
 
 export default function Header() {
-
   const headerConfig = siteMeta.header || defaultHeader;
   const layout = { ...defaultLayout, ...(headerConfig.layout || {}) };
   const behavior = { ...defaultBehavior, ...(headerConfig.behavior || {}) };
@@ -198,47 +197,49 @@ export default function Header() {
   const elevated = useScrollElevation(isSticky);
 
   return (
-    <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
-      <AppBar
-        position={isSticky ? 'sticky' : 'static'}
-        elevation={0}
-        sx={(t) => ({
-          backgroundColor: t.palette.background.paper,
-          borderBottom: '1px solid transparent',
-          transition: t.transitions.create(['box-shadow', 'border-color'], {
-            duration: t.transitions.duration.shorter,
-          }),
-          boxShadow: isSticky && elevated ? t.shadows[4] : 'none',
-          borderColor: isSticky && elevated ? t.palette.divider : 'transparent',
-          '@media (prefers-reduced-motion: reduce)': {
-            transition: 'none',
-          },
-        })}
+    <AppBar
+      component="header"
+      position={isSticky ? 'sticky' : 'static'}
+      data-elevated={elevated}
+      elevation={0}
+      sx={(t) => ({
+        top: 0,
+        backgroundColor: t.palette.background.paper,
+        borderBottom: '1px solid transparent',
+        transition: t.transitions.create(['box-shadow', 'border-color'], {
+          duration: t.transitions.duration.shorter,
+        }),
+        boxShadow: isSticky && elevated ? t.shadows[4] : 'none',
+        borderColor: isSticky && elevated ? t.palette.divider : 'transparent',
+        '@media (prefers-reduced-motion: reduce)': {
+          transition: 'none',
+        },
+        zIndex: t.zIndex.appBar,
+      })}
+    >
+      <Toolbar
+        sx={{
+          width: '100%',
+          minHeight: { xs: 56, sm: 64 },
+          display: 'grid',
+          gridTemplateColumns: '1fr auto 1fr',
+          alignItems: 'center',
+          columnGap: { xs: 1.5, md: 3 },
+          px: { xs: 2, md: 3 },
+        }}
       >
-        <Toolbar
-          sx={(t) => ({
-            width: '100%',
-            minHeight: { xs: 56, sm: 64 },
-            px: { xs: 2, md: 3 },
-            display: 'grid',
-            gridTemplateColumns: '1fr auto 1fr',
-            alignItems: 'center',
-            columnGap: { xs: t.spacing(1.5), md: t.spacing(3) },
-          })}
-        >
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', minWidth: 0 }}>
-            {renderHeaderSlot(layout.left)}
-          </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', minWidth: 0 }}>
+          {renderHeaderSlot(layout.left)}
+        </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minWidth: 0 }}>
-            {renderHeaderSlot(layout.center)}
-          </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minWidth: 0 }}>
+          {renderHeaderSlot(layout.center)}
+        </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', minWidth: 0 }}>
-            {renderHeaderSlot(layout.right)}
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', minWidth: 0 }}>
+          {renderHeaderSlot(layout.right)}
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }

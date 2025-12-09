@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 
 import Header from './Header.jsx';
@@ -22,9 +23,9 @@ export default function Layout({ children }) {
         Skip to main content
       </a>
       <Header />
-      <main id="main-content" tabIndex="-1" role="main">
+      <Box component="main" id="main-content" tabIndex="-1" role="main">
         {children}
-      </main>
+      </Box>
       <Footer />
     </div>
   );
