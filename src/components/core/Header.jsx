@@ -205,7 +205,7 @@ export default function Header() {
   const elevated = useScrollElevation(isSticky);
 
   return (
-    <Box component="header" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
+    <Box component="div" sx={{ position: 'relative', zIndex: (t) => t.zIndex.appBar }}>
       <AppBar
         component="header"
         position={isSticky ? 'sticky' : 'static'}
