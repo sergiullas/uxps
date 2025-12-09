@@ -15,6 +15,8 @@ export default function ResumePronunciation() {
   const audioRef = React.useRef(null);
 
   const hasSources = Boolean(sources.length);
+  const activeSource = sources[activeSourceIndex] || sources[0];
+  const activeLabel = activeSource?.label || 'name pronunciation';
 
   React.useEffect(() => {
     const audio = audioRef.current;
@@ -36,9 +38,6 @@ export default function ResumePronunciation() {
   }, [activeSource?.src]);
 
   if (!enabled || !hasSources) return null;
-
-  const activeSource = sources[activeSourceIndex] || sources[0];
-  const activeLabel = activeSource?.label || 'name pronunciation';
 
   const handlePlay = () => {
     if (!audioRef.current) return;
