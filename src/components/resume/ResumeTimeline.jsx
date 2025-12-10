@@ -1,120 +1,376 @@
 import * as React from 'react';
 import {
+  alpha,
+  Avatar,
   Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
   Chip,
-  Collapse,
   IconButton,
+  Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FadeIn, SlideUpOnScroll, StaggerList } from '../../lib/motion/index.js';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
+import { formatDateRange } from '../../utils/date.js';
 
-function isExpanded(id, expandedIds) {
-  return expandedIds.includes(id);
+const MotionBox = motion.div;
+
+function getInitialExpandedState(companies) {
+  return companies.reduce((acc, company) => {
+    const currentRoles = company.roles.filter((role) => role.isCurrent);
+    if (currentRoles.length) {
+      acc[company.id] = currentRoles.map((role) => role.id);
+    } else if (company.roles.length) {
+      acc[company.id] = [company.roles[0].id];
+    } else {
+      acc[company.id] = [];
+    }
+    return acc;
+  }, {});
 }
 
-function toggleExpanded(id, expandedIds) {
-  return isExpanded(id, expandedIds)
-    ? expandedIds.filter((item) => item !== id)
-    : [...expandedIds, id];
-}
+function RoleDetails({
+  role,
+  isExpanded,
+  contentId,
+  prefersReducedMotion,
+  isPrintMode,
+}) {
+  if (isPrintMode) {
+    return (
+      <Box id={contentId} sx={{ mt: 1.5 }}>
+        <RoleBody role={role} />
+      </Box>
+    );
+  }
 
-export default function ResumeTimeline({ roles, activeEraFilter }) {
-  const [expandedIds, setExpandedIds] = React.useState([]);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const filteredRoles = React.useMemo(
-    () =>
-      roles.filter((role) =>
-        activeEraFilter === 'all' ? true : role.era === activeEraFilter
-      ),
-    [roles, activeEraFilter]
-  );
-
-  const handleToggle = (id) => {
-    setExpandedIds((prev) => toggleExpanded(id, prev));
-  };
-
-  const handleExpandAll = () => {
-    setExpandedIds(filteredRoles.map((role) => role.id));
-  };
-
-  const handleCollapseAll = () => {
-    setExpandedIds([]);
-  };
-
-  const collapseTimeout = prefersReducedMotion ? 0 : 'auto';
+  if (prefersReducedMotion) {
+    return isExpanded ? (
+      <Box id={contentId} sx={{ mt: 1.5 }}>
+        <RoleBody role={role} />
+      </Box>
+    ) : null;
+  }
 
   return (
-    <Box>
-      <Box
-        className="timeline-controls"
-        sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}
-      >
-        <Button onClick={handleExpandAll}>Expand all</Button>
-        <Button onClick={handleCollapseAll}>Collapse all</Button>
+    <AnimatePresence initial={false}>
+      {isExpanded ? (
+        <MotionBox
+          key={role.id}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.24 }}
+        >
+          <FadeIn as={Box} id={contentId} sx={{ mt: 1.5 }}>
+            <RoleBody role={role} />
+          </FadeIn>
+        </MotionBox>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+function RoleBody({ role }) {
+  return (
+    <Stack spacing={1.5} sx={{ pb: 0.5 }}>
+      {role.summary ? (
+        <Typography variant="body2" color="text.secondary" sx={{ maxWidth: { md: '70ch' } }}>
+          {role.summary}
+        </Typography>
+      ) : null}
+
+      {role.bullets?.length ? (
+        <Box component="ul" sx={{ p: 0, m: 0, pl: 2.5, display: 'grid', gap: 0.75 }}>
+          {role.bullets.map((item) => (
+            <Box component="li" key={item}>
+              <Typography variant="body2" color="text.secondary">
+                {item}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      ) : null}
+
+      {role.tags?.length ? (
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+          {role.tags.map((tag) => (
+            <Chip key={tag} label={tag} size="small" variant="outlined" />
+          ))}
+        </Box>
+      ) : null}
+    </Stack>
+  );
+}
+
+function RoleNode({ isCurrent, isExpanded }) {
+  const theme = useTheme();
+  const outlineColor = theme.palette.primary.main;
+  const haloColor = alpha(
+    theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+    theme.palette.mode === 'dark' ? 0.15 : 0.12
+  );
+
+  const size = isCurrent ? 16 : 12;
+
+  return (
+    <Box
+      sx={{
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        border: `2px solid ${outlineColor}`,
+        backgroundColor: isCurrent ? haloColor : 'transparent',
+        boxShadow: isCurrent && isExpanded ? `0 0 0 6px ${haloColor}` : 'none',
+        transition: 'box-shadow 160ms ease, background-color 160ms ease',
+      }}
+      aria-hidden
+    />
+  );
+}
+
+function RoleItem({
+  companyId,
+  role,
+  isExpanded,
+  onToggle,
+  isPrintMode,
+  prefersReducedMotion,
+}) {
+  const contentId = `${companyId}-${role.id}-content`;
+  const employmentLine = [role.employmentType, formatDateRange(role.startDate, role.endDate)]
+    .filter(Boolean)
+    .join(' • ');
+
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: '28px 1fr', sm: '40px 1fr' },
+        columnGap: { xs: 1.5, sm: 2.5 },
+        position: 'relative',
+      }}
+    >
+      <Box sx={{ display: 'flex', justifyContent: 'center', pt: 0.5 }} aria-hidden>
+        <Box sx={{ mt: { xs: 0.5, sm: 0.75 } }}>
+          <RoleNode isCurrent={role.isCurrent} isExpanded={isExpanded} />
+        </Box>
       </Box>
 
-      <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, display: 'grid', gap: 2 }}>
-        {filteredRoles.map((role) => {
-          const open = isExpanded(role.id, expandedIds);
-          const contentId = `resume-role-content-${role.id}`;
-          return (
-            <Box key={role.id} component="li">
-              <Card className="resume-print-card" sx={{ overflow: 'hidden' }}>
-                <CardHeader
-                  title={
-                    <Typography component="h3" variant="h6" color="text.primary">
-                      {role.title} · {role.company}
-                    </Typography>
-                  }
-                  subheader={
-                    <Typography variant="body2" color="text.secondary">
-                      {role.timeframeLabel} · {role.location}
-                    </Typography>
-                  }
-                  action={
-                    <IconButton
-                      onClick={() => handleToggle(role.id)}
-                      aria-expanded={open}
-                      aria-controls={contentId}
-                      aria-label={open ? 'Collapse role details' : 'Expand role details'}
-                    >
-                      {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                    </IconButton>
-                  }
-                />
-                <Collapse in={open} timeout={collapseTimeout} collapsedSize={0}>
-                  <CardContent id={contentId}>
-                    <Box component="ul" sx={{ pl: 2.75, m: 0, display: 'grid', gap: 0.75 }}>
-                      {role.bullets.map((item, index) => (
-                        <Box component="li" key={index}>
-                          <Typography variant="body2" color="text.secondary">
-                            {item}
-                          </Typography>
-                        </Box>
-                      ))}
-                    </Box>
+      <Box sx={{ display: 'grid', gap: 0.75 }}>
+        <Stack direction="row" spacing={1} alignItems="flex-start" justifyContent="space-between">
+          <Box sx={{ minWidth: 0, flex: 1 }}>
+            <Typography component="h3" variant="h6" color="text.primary">
+              {role.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {employmentLine}
+              {role.location ? ` • ${role.location}` : ''}
+            </Typography>
+          </Box>
 
-                    {role.tags?.length ? (
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 2 }}>
-                        {role.tags.map((tag) => (
-                          <Chip key={tag} label={tag} size="small" variant="outlined" />
-                        ))}
-                      </Box>
-                    ) : null}
-                  </CardContent>
-                </Collapse>
-              </Card>
-            </Box>
-          );
-        })}
+          <IconButton
+            onClick={() => onToggle(role.id)}
+            aria-expanded={isPrintMode ? true : isExpanded}
+            aria-controls={contentId}
+            aria-label={isExpanded ? 'Collapse role details' : 'Expand role details'}
+            sx={{
+              alignSelf: 'flex-start',
+              display: { print: 'none' },
+            }}
+          >
+            {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+        </Stack>
+
+        <RoleDetails
+          role={role}
+          isExpanded={isPrintMode ? true : isExpanded}
+          contentId={contentId}
+          prefersReducedMotion={prefersReducedMotion}
+          isPrintMode={isPrintMode}
+        />
       </Box>
     </Box>
+  );
+}
+
+function CompanyHeader({ company }) {
+  const theme = useTheme();
+  const dateRange = formatDateRange(company.startDate, company.endDate);
+  const hasLogo = Boolean(company.companyLogo);
+
+  return (
+    <Stack direction="row" spacing={2.5} alignItems="flex-start" sx={{ mb: 2 }}>
+      {hasLogo ? (
+        <Avatar
+          alt={`${company.companyName} logo`}
+          src={company.companyLogo}
+          variant="rounded"
+          sx={{ width: 48, height: 48 }}
+        />
+      ) : (
+        <Box
+          aria-hidden
+          sx={{
+            width: 48,
+            height: 48,
+            borderRadius: 1.25,
+            border: `1px solid ${theme.palette.divider}`,
+            display: 'grid',
+            placeItems: 'center',
+            color: 'text.secondary',
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+          }}
+        >
+          {company.companyName.slice(0, 2).toUpperCase()}
+        </Box>
+      )}
+
+      <Stack spacing={0.75} sx={{ flex: 1, minWidth: 0 }}>
+        <Typography component="h3" variant="h4" color="text.primary">
+          {company.companyName}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {company.location ? `${company.location} • ` : ''}
+          {dateRange}
+        </Typography>
+
+        {company.currentEraLabel ? (
+          <Chip
+            label={`Current era: ${company.currentEraLabel}`}
+            size="small"
+            variant="outlined"
+            sx={{ alignSelf: 'flex-start' }}
+          />
+        ) : null}
+
+        {company.summary ? (
+          <Typography variant="body2" color="text.secondary" sx={{ maxWidth: { md: '80ch' } }}>
+            {company.summary}
+          </Typography>
+        ) : null}
+      </Stack>
+    </Stack>
+  );
+}
+
+export default function ResumeTimeline({ companies = [], activeEraFilter }) {
+  const theme = useTheme();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const isPrintMode = useMediaQuery('print');
+  const spineColor = React.useMemo(
+    () =>
+      alpha(
+        theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+        theme.palette.mode === 'dark' ? 0.15 : 0.12
+      ),
+    [theme]
+  );
+
+  const filteredCompanies = React.useMemo(() => {
+    return companies
+      .map((company) => ({
+        ...company,
+        roles:
+          activeEraFilter === 'all'
+            ? company.roles
+            : company.roles.filter((role) => role.era === activeEraFilter),
+      }))
+      .filter((company) => company.roles.length > 0);
+  }, [companies, activeEraFilter]);
+
+  const [expandedByCompany, setExpandedByCompany] = React.useState(() =>
+    getInitialExpandedState(filteredCompanies)
+  );
+
+  React.useEffect(() => {
+    setExpandedByCompany(getInitialExpandedState(filteredCompanies));
+  }, [filteredCompanies]);
+
+  const handleToggle = (companyId, roleId) => {
+    setExpandedByCompany((prev) => {
+      const current = prev[companyId] || [];
+      const isOpen = current.includes(roleId);
+      const next = isOpen ? current.filter((id) => id !== roleId) : [...current, roleId];
+      return { ...prev, [companyId]: next };
+    });
+  };
+
+  if (!filteredCompanies.length) {
+    return (
+      <Typography variant="body2" color="text.secondary">
+        No roles to show yet.
+      </Typography>
+    );
+  }
+
+  return (
+    <Stack spacing={{ xs: 3, md: 4 }}>
+      {filteredCompanies.map((company) => {
+        const expandedRoles = expandedByCompany[company.id] || [];
+        const spineOffset = { xs: 14, sm: 20 };
+
+        return (
+          <SlideUpOnScroll key={company.id}>
+            <Box
+              component="article"
+              sx={{
+                p: { xs: 2.5, md: 3 },
+                borderRadius: 2,
+                border: `1px solid ${theme.palette.divider}`,
+                backgroundColor: theme.palette.background.paper,
+                position: 'relative',
+                overflow: 'hidden',
+                '@media print': {
+                  boxShadow: 'none',
+                  borderColor: theme.palette.text.secondary,
+                },
+              }}
+            >
+              <CompanyHeader company={company} />
+
+              <Box sx={{ position: 'relative', mt: 1 }}>
+                <Box
+                  aria-hidden
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: { xs: `${spineOffset.xs}px`, sm: `${spineOffset.sm}px` },
+                    width: '2px',
+                    backgroundColor: spineColor,
+                    borderRadius: 1,
+                    pointerEvents: 'none',
+                    '@media print': {
+                      backgroundColor: theme.palette.text.secondary,
+                    },
+                  }}
+                />
+
+                <StaggerList as={Box} sx={{ display: 'grid', rowGap: { xs: 2.5, sm: 3 } }}>
+                  {company.roles.map((role) => (
+                    <RoleItem
+                      key={role.id}
+                      companyId={company.id}
+                      role={role}
+                      isExpanded={isPrintMode ? true : expandedRoles.includes(role.id)}
+                      onToggle={(roleId) => handleToggle(company.id, roleId)}
+                      isPrintMode={isPrintMode}
+                      prefersReducedMotion={prefersReducedMotion}
+                    />
+                  ))}
+                </StaggerList>
+              </Box>
+            </Box>
+          </SlideUpOnScroll>
+        );
+      })}
+    </Stack>
   );
 }
