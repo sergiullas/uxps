@@ -16,6 +16,8 @@ export function createEditorialTheme(mode = 'light') {
       card: editorialThemeTokens.shadows.card,
     },
 
+    motion: editorialThemeTokens.motion,
+
     components: {
       MuiCssBaseline: {
         styleOverrides: {

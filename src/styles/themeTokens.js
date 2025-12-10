@@ -181,4 +181,20 @@ export const editorialThemeTokens = {
   shadows: {
     card: '0 18px 45px rgba(15, 23, 42, 0.18)', // editorial card shadow
   },
+  motion: {
+    durations: {
+      xshort: 0.12,
+      short: 0.18,
+      medium: 0.24,
+      long: 0.32,
+    },
+    easing: {
+      standard: [0.2, 0, 0, 1],
+      emphasized: [0.32, 0, 0.67, 0],
+    },
+    spring: {
+      subtle: { type: 'spring', stiffness: 170, damping: 26, mass: 1 },
+      gentle: { type: 'spring', stiffness: 120, damping: 20, mass: 1 },
+    },
+  },
 };

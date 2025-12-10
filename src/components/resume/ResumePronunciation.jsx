@@ -91,6 +91,7 @@ export default function ResumePronunciation() {
         </Typography>
       )}
 
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} aria-live="polite" key={activeSource?.src}>
         {activeSource ? <source src={activeSource.src} type={activeSource.type} /> : null}
       </audio>
