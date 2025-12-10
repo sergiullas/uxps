@@ -7,13 +7,14 @@ import { siteMeta } from '../content/siteMeta.js';
 import WorkItemCard from '../components/work/WorkItemCard.jsx';
 import { FadeIn, MotionErrorBoundary, SlideUpOnScroll, StaggerList } from '../lib/motion/index.js';
 
+const offsetPattern = ['none', 'small', 'none', 'medium'];
+const offsetStyles = {
+  none: { mt: 0 },
+  small: { mt: { md: 3, lg: 4 } },
+  medium: { mt: { md: 5, lg: 6 } },
+};
+
 export default function Work() {
-  const offsetPattern = ['none', 'small', 'none', 'medium'];
-  const offsetStyles = {
-    none: { mt: 0 },
-    small: { mt: { md: 3, lg: 4 } },
-    medium: { mt: { md: 5, lg: 6 } },
-  };
 
   return (
     <>
@@ -44,7 +45,6 @@ export default function Work() {
                 alignItems: 'start',
                 gridTemplateColumns: {
                   xs: '1fr',
-                  sm: '1fr',
                   md: 'repeat(2, minmax(280px, 1fr))',
                   lg: 'repeat(3, minmax(280px, 1fr))',
                 },
