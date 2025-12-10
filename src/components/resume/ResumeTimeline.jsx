@@ -22,9 +22,7 @@ const MotionBox = motion.div;
 function getInitialExpandedState(companies) {
   return companies.reduce((acc, company) => {
     const currentRoles = company.roles.filter((role) => role.isCurrent);
-    if (currentRoles.length === 1) {
-      acc[company.id] = [currentRoles[0].id];
-    } else if (currentRoles.length > 1) {
+    if (currentRoles.length) {
       acc[company.id] = currentRoles.map((role) => role.id);
     } else if (company.roles.length) {
       acc[company.id] = [company.roles[0].id];
@@ -88,8 +86,8 @@ function RoleBody({ role }) {
 
       {role.bullets?.length ? (
         <Box component="ul" sx={{ p: 0, m: 0, pl: 2.5, display: 'grid', gap: 0.75 }}>
-          {role.bullets.map((item, index) => (
-            <Box component="li" key={index}>
+          {role.bullets.map((item) => (
+            <Box component="li" key={item}>
               <Typography variant="body2" color="text.secondary">
                 {item}
               </Typography>

@@ -1,5 +1,5 @@
 export function formatDate(value, { month = 'short', year = 'numeric' } = {}) {
-  if (!value) return 'Present';
+  if (!value) return null;
   const date = new Date(`${value}-01`);
   if (Number.isNaN(date.getTime())) return value;
   try {
@@ -12,6 +12,9 @@ export function formatDate(value, { month = 'short', year = 'numeric' } = {}) {
 
 export function formatDateRange(startDate, endDate, options) {
   const start = formatDate(startDate, options);
-  const end = endDate ? formatDate(endDate, options) : 'Present';
+  if (!start) {
+    return '';
+  }
+  const end = formatDate(endDate, options) || 'Present';
   return `${start} – ${end}`;
 }
