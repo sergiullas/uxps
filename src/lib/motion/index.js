@@ -5,4 +5,4 @@ export { default as MotionErrorBoundary } from './MotionErrorBoundary.jsx';
 export { getMotionComponent } from './getMotionComponent.js';
 export { MotionProvider, useMotionConfig } from './MotionProvider.jsx';
 export { useInView } from './useInView.js';
-export { default as usePrefersReducedMotion } from './usePrefersReducedMotion.js';
+export { default as usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.js';

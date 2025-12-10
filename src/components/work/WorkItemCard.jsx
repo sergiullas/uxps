@@ -22,7 +22,7 @@ export default function WorkItemCard({ item, headingLevel = 'h3' }) {
       backgroundColor: t.palette.background.paper,
       p: { xs: t.spacing(2.5), md: t.spacing(3) },
       boxShadow: t.customShadows?.card,
-      transition: 'border-color 150ms ease, box-shadow 150ms ease',
+      transition: 'border-color 150ms ease',
       '&:hover, &:focus-visible': {
         borderColor: t.palette.primary.main,
         boxShadow: t.customShadows?.primary,

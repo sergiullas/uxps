@@ -37,9 +37,13 @@ export default function ResumeEducation({ education }) {
                 className="resume-print-card"
                 sx={{
                   borderRadius: 2,
-                  '&:hover': {
-                    boxShadow: (theme) => theme.shadows[3],
-                  },
+                  ...(prefersReducedMotion
+                    ? {
+                        '&:hover, &:focus-visible': {
+                          boxShadow: (theme) => theme.shadows[3],
+                        },
+                      }
+                    : {}),
                 }}
                 whileHover={prefersReducedMotion ? undefined : { y: -2, boxShadow: hoverShadow }}
                 transition={prefersReducedMotion ? undefined : hoverTransition}

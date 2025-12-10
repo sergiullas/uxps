@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import usePrefersReducedMotion from './usePrefersReducedMotion.js';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
 const MotionContext = React.createContext({ prefersReducedMotion: false, motion: {} });
 

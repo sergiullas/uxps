@@ -20,7 +20,7 @@ export default class MotionErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback ?? this.props.children;
+      return this.props.fallback ?? null;
     }
 
     return this.props.children;

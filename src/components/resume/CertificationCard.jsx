@@ -22,6 +22,14 @@ export default function CertificationCard({ certification }) {
   const MotionCard = getMotionComponent(Card);
   const hoverShadow = theme.shadows[4];
   const transition = { duration: motion?.durations?.xshort ?? 0.12 };
+  const CardComponent = prefersReducedMotion ? Card : MotionCard;
+  const cardSx = {
+    borderRadius: 2,
+    transition: (t) => t.transitions.create(['box-shadow', 'transform'], { duration: t.transitions.duration.shorter }),
+  };
+  const motionProps = prefersReducedMotion
+    ? {}
+    : { whileHover: { y: -2, boxShadow: hoverShadow }, transition };
 
   const cardContent = (
     <CardContent>
@@ -63,14 +71,12 @@ export default function CertificationCard({ certification }) {
   );
 
   if (verificationUrl) {
-    const CardComponent = prefersReducedMotion ? Card : MotionCard;
     return (
       <CardComponent
         variant="outlined"
         className="resume-print-card"
-        sx={{ borderRadius: 2, transition: (t) => t.transitions.create(['box-shadow', 'transform'], { duration: t.transitions.duration.shorter }) }}
-        whileHover={prefersReducedMotion ? undefined : { y: -2, boxShadow: hoverShadow }}
-        transition={prefersReducedMotion ? undefined : transition}
+        sx={cardSx}
+        {...motionProps}
       >
         <CardActionArea
           component="a"
@@ -91,14 +97,12 @@ export default function CertificationCard({ certification }) {
     );
   }
 
-  const CardComponent = prefersReducedMotion ? Card : MotionCard;
   return (
     <CardComponent
       variant="outlined"
       className="resume-print-card"
-      sx={{ borderRadius: 2, transition: (t) => t.transitions.create(['box-shadow', 'transform'], { duration: t.transitions.duration.shorter }) }}
-      whileHover={prefersReducedMotion ? undefined : { y: -2, boxShadow: hoverShadow }}
-      transition={prefersReducedMotion ? undefined : transition}
+      sx={cardSx}
+      {...motionProps}
     >
       {cardContent}
     </CardComponent>
