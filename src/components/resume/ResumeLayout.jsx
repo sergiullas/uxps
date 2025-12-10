@@ -14,7 +14,11 @@ import { siteMeta } from '../../content/siteMeta.js';
 import { SlideUpOnScroll } from '../../lib/motion/index.js';
 
 function ExperienceSection({ resumeData }) {
-  const roles = React.useMemo(() => resumeData?.experience?.roles || [], [resumeData]);
+  const companies = React.useMemo(() => resumeData?.experience?.companies || [], [resumeData]);
+  const roles = React.useMemo(
+    () => companies.flatMap((company) => company.roles || []),
+    [companies]
+  );
   const [activeEra, setActiveEra] = React.useState('all');
 
   const totalCounts = React.useMemo(
@@ -40,7 +44,7 @@ function ExperienceSection({ resumeData }) {
       </Typography>
 
       <ResumeFilters activeEra={activeEra} onEraChange={setActiveEra} totalCounts={totalCounts} />
-      <ResumeTimeline roles={roles} activeEraFilter={activeEra} />
+      <ResumeTimeline companies={companies} activeEraFilter={activeEra} />
     </Box>
   );
 }

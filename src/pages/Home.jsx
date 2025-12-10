@@ -10,6 +10,7 @@ import { siteMeta } from '../content/siteMeta.js';
 import { WORK_ITEMS, workContent } from '../content/work.js';
 import { RESUME } from '../content/resume.js';
 import { contactContent } from '../content/contact.js';
+import { formatDateRange } from '../utils/date.js';
 
 const SELECTED_WORK_COUNT = 3;
 
@@ -19,6 +20,16 @@ export default function Home() {
   const resumeHeading = 'Resume snapshots';
   const resumeDescription = resumeData.summary?.intro?.[0] ||
     'Highlights from recent roles and education.';
+  const resumeHighlights = React.useMemo(() => {
+    const companies = resumeData.experience?.companies || [];
+    return companies.flatMap((company) =>
+      company.roles.map((role) => ({
+        ...role,
+        companyName: company.companyName,
+        timeframeLabel: formatDateRange(role.startDate, role.endDate),
+      }))
+    );
+  }, [resumeData]);
 
   return (
     <>
@@ -122,7 +133,7 @@ export default function Home() {
           </Stack>
 
           <Stack spacing={{ xs: 2.5, md: 3 }}>
-            {resumeData.experience.roles.map((role) => (
+            {resumeHighlights.map((role) => (
               <Box
                 key={role.id}
                 sx={(t) => ({
@@ -134,7 +145,7 @@ export default function Home() {
               >
                 <Stack spacing={0.5}>
                   <Typography component="h3" variant="h4" color="text.primary">
-                    {role.title} · {role.company}
+                    {role.title} · {role.companyName}
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
                     {role.timeframeLabel} · {role.location}

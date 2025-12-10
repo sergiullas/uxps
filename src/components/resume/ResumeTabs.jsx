@@ -88,9 +88,13 @@ function getPanelProps(tabId, resumeData) {
 }
 
 function ExperiencePanel({ resumeData }) {
-  const roles = React.useMemo(
-    () => resumeData?.experience?.roles || [],
+  const companies = React.useMemo(
+    () => resumeData?.experience?.companies || [],
     [resumeData]
+  );
+  const roles = React.useMemo(
+    () => companies.flatMap((company) => company.roles || []),
+    [companies]
   );
   const [activeEra, setActiveEra] = React.useState('all');
 
@@ -122,7 +126,7 @@ function ExperiencePanel({ resumeData }) {
         totalCounts={totalCounts}
       />
 
-      <ResumeTimeline roles={roles} activeEraFilter={activeEra} />
+      <ResumeTimeline companies={companies} activeEraFilter={activeEra} />
     </Box>
   );
 }
