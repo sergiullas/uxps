@@ -8,6 +8,13 @@ import WorkItemCard from '../components/work/WorkItemCard.jsx';
 import { FadeIn, MotionErrorBoundary, SlideUpOnScroll, StaggerList } from '../lib/motion/index.js';
 
 export default function Work() {
+  const offsetPattern = ['none', 'small', 'none', 'medium'];
+  const offsetStyles = {
+    none: { mt: 0 },
+    small: { mt: { md: 3, lg: 4 } },
+    medium: { mt: { md: 5, lg: 6 } },
+  };
+
   return (
     <>
       <Helmet>
@@ -33,8 +40,14 @@ export default function Work() {
             <Box
               sx={{
                 display: 'grid',
-                gap: { xs: 2, md: 3 },
-                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
+                gap: { xs: 2, md: 3, lg: 4 },
+                alignItems: 'start',
+                gridTemplateColumns: {
+                  xs: '1fr',
+                  sm: '1fr',
+                  md: 'repeat(2, minmax(280px, 1fr))',
+                  lg: 'repeat(3, minmax(280px, 1fr))',
+                },
               }}
             >
               <StaggerList
@@ -43,11 +56,16 @@ export default function Work() {
                 interval={0.06}
                 triggerOnScroll
               >
-                {WORK_ITEMS.map((item) => (
-                  <FadeIn key={item.slug} as="div" style={{ display: 'contents' }}>
-                    <WorkItemCard item={item} headingLevel="h2" />
-                  </FadeIn>
-                ))}
+                {WORK_ITEMS.map((item, index) => {
+                  const offsetVariant = offsetPattern[index % offsetPattern.length];
+                  const offsetSx = offsetStyles[offsetVariant];
+
+                  return (
+                    <FadeIn key={item.slug} as="div" style={{ display: 'contents' }}>
+                      <WorkItemCard item={item} headingLevel="h2" offsetSx={offsetSx} />
+                    </FadeIn>
+                  );
+                })}
               </StaggerList>
             </Box>
           </Stack>

@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { getMotionComponent, useMotionConfig } from '../../lib/motion/index.js';
 
-export default function WorkItemCard({ item, headingLevel = 'h3' }) {
+export default function WorkItemCard({ item, headingLevel = 'h3', offsetSx }) {
   const theme = useTheme();
   const { prefersReducedMotion, motion } = useMotionConfig();
   const MotionLink = getMotionComponent(Link);
@@ -15,19 +15,22 @@ export default function WorkItemCard({ item, headingLevel = 'h3' }) {
     component: RouterLink,
     to: `/work/${item.slug}`,
     underline: 'none',
-    sx: (t) => ({
-      display: 'block',
-      border: `1px solid ${t.palette.divider}`,
-      borderRadius: t.shape.borderRadius,
-      backgroundColor: t.palette.background.paper,
-      p: { xs: t.spacing(2.5), md: t.spacing(3) },
-      boxShadow: t.customShadows?.card,
-      transition: 'border-color 150ms ease',
-      '&:hover, &:focus-visible': {
-        borderColor: t.palette.primary.main,
-        boxShadow: t.customShadows?.primary,
-      },
-    }),
+    sx: [
+      (t) => ({
+        display: 'block',
+        border: `1px solid ${t.palette.divider}`,
+        borderRadius: t.shape.borderRadius,
+        backgroundColor: t.palette.background.paper,
+        p: { xs: t.spacing(2.5), md: t.spacing(3) },
+        boxShadow: t.customShadows?.card,
+        transition: 'border-color 150ms ease',
+        '&:hover, &:focus-visible': {
+          borderColor: t.palette.primary.main,
+          boxShadow: t.customShadows?.primary,
+        },
+      }),
+      offsetSx,
+    ],
     'aria-label': `View case study: ${item.title}`,
   };
 
