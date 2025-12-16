@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Card, CardContent, Box, Grid, Typography } from '@mui/material';
-import { recruiterEssentials } from '../../content/recruiterEssentials';
-import IconRenderer from './IconRenderer';
+import { recruiterEssentials } from '../../content/recruiterEssentials.js';
+import IconRenderer from './IconRenderer.jsx';
 
 export default function RecruiterEssentials() {
   const { title, description, sections } = recruiterEssentials;
+  const sectionsList = sections ?? [];
 
   return (
     <Card
@@ -28,7 +29,7 @@ export default function RecruiterEssentials() {
         </Box>
 
         <Grid container spacing={4}>
-          {sections?.map((section) => (
+          {sectionsList.map((section) => (
             <Grid item xs={12} sm={6} key={section.id}>
               <Section section={section} />
             </Grid>
@@ -41,6 +42,7 @@ export default function RecruiterEssentials() {
 
 function Section({ section }) {
   const { label, icon, fields } = section;
+  const fieldsList = fields ?? [];
 
   return (
     <Box>
@@ -59,7 +61,7 @@ function Section({ section }) {
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-        {fields?.map((field) => (
+        {fieldsList.map((field) => (
           <FieldRow key={field.id} field={field} />
         ))}
       </Box>

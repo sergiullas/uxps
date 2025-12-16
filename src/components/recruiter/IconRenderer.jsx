@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { iconMap } from './iconMap';
+import { iconMap } from './iconMap.js';
 
 export default function IconRenderer({ iconName, 'aria-label': ariaLabel, className, ...props }) {
   if (!iconName) return null;
@@ -7,9 +7,9 @@ export default function IconRenderer({ iconName, 'aria-label': ariaLabel, classN
   const IconComponent = iconMap[iconName];
 
   if (!IconComponent) {
-    const isProd = typeof import.meta !== 'undefined' ? import.meta.env?.PROD : true;
+    const isDev = typeof import.meta !== 'undefined' && import.meta.env?.DEV;
 
-    if (!isProd) {
+    if (isDev) {
       // eslint-disable-next-line no-console
       console.warn(
         `[IconRenderer] Icon "${iconName}" not found in iconMap. Add it to src/components/recruiter/iconMap.js`
