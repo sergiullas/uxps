@@ -6,7 +6,7 @@ import ResumeTimeline from './ResumeTimeline.jsx';
 import ResumeEducation from './ResumeEducation.jsx';
 import ResumeCertifications from './ResumeCertifications.jsx';
 import ResumeFilters from './ResumeFilters.jsx';
-import RecruiterEssentials from './RecruiterEssentials.jsx';
+import RecruiterEssentials from '../recruiter/RecruiterEssentials.jsx';
 import ResumePronunciation from './ResumePronunciation.jsx';
 import ResumeMiniMap from './ResumeMiniMap.jsx';
 import { resumeConfig } from '../../content/resume.js';
@@ -49,7 +49,7 @@ function ExperienceSection({ resumeData }) {
   );
 }
 
-function RecruiterEssentialsSection({ essentials }) {
+function RecruiterEssentialsSection() {
   const showRecruiterEssentials = resumeConfig?.recruiterEssentials?.show ?? true;
   if (!showRecruiterEssentials) return null;
 
@@ -65,7 +65,7 @@ function RecruiterEssentialsSection({ essentials }) {
         Recruiter essentials
       </Typography>
 
-      <RecruiterEssentials essentials={essentials} />
+      <RecruiterEssentials />
     </Box>
   );
 }
@@ -147,7 +147,7 @@ export default function ResumeLayout({ resumeData }) {
             <ResumeSummary summary={resumeData.summary} />
           </SlideUpOnScroll>
           <SlideUpOnScroll>
-            <RecruiterEssentialsSection essentials={resumeData.recruiterEssentials} />
+            <RecruiterEssentialsSection />
           </SlideUpOnScroll>
           <SlideUpOnScroll>
             <ExperienceSection resumeData={resumeData} />

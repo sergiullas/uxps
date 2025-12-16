@@ -45,6 +45,24 @@
     border: 1px solid #e5e7eb !important;
   }
 
+  .resume-print-scope .recruiter-essentials-card {
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .resume-print-scope .recruiter-essentials-card .icon-renderer {
+    display: none !important;
+  }
+
+  .resume-print-scope .recruiter-essentials-card .MuiTypography-root {
+    color: #000 !important;
+  }
+
+  .resume-print-scope .recruiter-essentials-card * {
+    page-break-inside: avoid;
+  }
+
   .resume-print-scope .MuiPaper-root {
     box-shadow: none !important;
   }
