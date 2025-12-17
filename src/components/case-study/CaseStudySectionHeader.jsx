@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { AppStack as Stack, AppTypography as Typography } from '../ui';
 
 export default function CaseStudySectionHeader({ eyebrow, title, kicker }) {
   return (

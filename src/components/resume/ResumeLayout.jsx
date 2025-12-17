@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material';
+import {
+  AppBox as Box,
+  AppButton as Button,
+  AppContainer as Container,
+  AppDivider as Divider,
+  AppStack as Stack,
+  AppTypography as Typography,
+} from '../ui';
 import ResumeSummary from './ResumeSummary.jsx';
 import ResumeSkills from './ResumeSkills.jsx';
 import ResumeTimeline from './ResumeTimeline.jsx';

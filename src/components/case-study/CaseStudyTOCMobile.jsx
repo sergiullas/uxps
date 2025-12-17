@@ -1,9 +1,19 @@
 import * as React from 'react';
-import { Box, Button, Divider, Drawer, IconButton, Link, Stack, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import {
+  AppBox as Box,
+  AppButton as Button,
+  AppDivider as Divider,
+  AppDrawer as Drawer,
+  AppIconButton as IconButton,
+  AppLink as Link,
+  AppStack as Stack,
+  AppTypography as Typography,
+  appIcons,
+} from '../ui';
 
 export default function CaseStudyTOCMobile({ sections = [], toc = {}, activeSectionId }) {
   const [open, setOpen] = React.useState(false);
+  const CloseIcon = appIcons.close;
   const isTOCEnabled = Boolean(toc?.enabled);
   const sectionsById = React.useMemo(
     () =>

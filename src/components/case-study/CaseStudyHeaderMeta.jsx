@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Chip, Link, Stack, Typography } from '@mui/material';
+import {
+  AppBox as Box,
+  AppChip as Chip,
+  AppLink as Link,
+  AppStack as Stack,
+  AppTypography as Typography,
+} from '../ui';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
 export default function CaseStudyHeaderMeta({ hero, compact = false, brand }) {

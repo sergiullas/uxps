@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { AppBox as Box, AppContainer as Container, AppStack as Stack, AppTypography as Typography } from '../components/ui';
 import { Helmet } from 'react-helmet-async';
 
 import { WORK_ITEMS, workContent } from '../content/work.js';

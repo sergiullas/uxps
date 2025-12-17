@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Stack } from '@mui/material';
+import { AppBox as Box, AppStack as Stack } from '../ui';
 import CaseStudySectionHeader from './CaseStudySectionHeader.jsx';
 import CaseStudyBody from './CaseStudyBody.jsx';
 import CaseStudyFigure from './CaseStudyFigure.jsx';

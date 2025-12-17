@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
+import { AppBox as Box, AppIconButton as IconButton, AppTooltip as Tooltip, AppTypography as Typography } from '../ui';
 
 import socialLinks from '../../content/socialLinks.js';
 import SocialIconRenderer from './SocialIconRenderer.jsx';
@@ -28,16 +28,7 @@ export default function SocialLinks({
 
   if (!location) {
     warnDev('[SocialLinks] Missing required prop: location');
-    return null;
   }
-
-  if (validLocations.size > 0 && !validLocations.has(location)) {
-    warnDev(
-      `[SocialLinks] Unknown location "${location}". Add it to socialLinks.settings.locations if valid.`,
-    );
-    return null;
-  }
-
   const visible = React.useMemo(() => {
     const items = [];
 
@@ -61,6 +52,17 @@ export default function SocialLinks({
 
     return items;
   }, [location, platforms, validLocations]);
+
+  if (validLocations.size > 0 && !validLocations.has(location)) {
+    warnDev(
+      `[SocialLinks] Unknown location "${location}". Add it to socialLinks.settings.locations if valid.`,
+    );
+    return null;
+  }
+
+  if (!location) {
+    return null;
+  }
 
   if (visible.length === 0) return null;
 

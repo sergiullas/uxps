@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { AppBox as Box, AppStack as Stack, AppTypography as Typography } from '../ui';
 
 import { siteMeta } from '../../content/siteMeta.js';
 import SocialLinks from '../social/SocialLinks.jsx';

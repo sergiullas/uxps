@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { AppBox as Box } from '../ui';
 import { Helmet } from 'react-helmet-async';
 
 import Header from './Header.jsx';

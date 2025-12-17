@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
+import {
+  AppBox as Box,
+  AppCard as Card,
+  AppCardContent as CardContent,
+  AppStack as Stack,
+  AppTypography as Typography,
+} from '../ui';
 import { useTheme } from '@mui/material/styles';
 import { getMotionComponent, useMotionConfig } from '../../lib/motion/index.js';
 

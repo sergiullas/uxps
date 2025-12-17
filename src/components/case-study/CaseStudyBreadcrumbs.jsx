@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
+import { AppBreadcrumbs as Breadcrumbs, AppLink as Link, AppTypography as Typography } from '../ui';
 
 export default function CaseStudyBreadcrumbs({ caseStudy }) {
   const title = caseStudy?.hero?.title;

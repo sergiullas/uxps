@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Chip, Typography } from '@mui/material';
+import { AppBox as Box, AppChip as Chip, AppTypography as Typography } from '../ui';
 
 export default function ResumeSkills({ skills }) {
   const clusters = skills?.clusters || [];

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import { Container } from '@mui/material';
+import { AppContainer as Container } from '../ui';
 
 import { getCaseStudyBySlug } from '../../content/case-studies/index.js';
 import SEOHead from '../SEOHead.jsx';

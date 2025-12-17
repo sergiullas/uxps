@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Link, Stack, Typography } from '@mui/material';
+import { AppBox as Box, AppLink as Link, AppStack as Stack, AppTypography as Typography } from '../ui';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { getMotionComponent, useMotionConfig } from '../../lib/motion/index.js';

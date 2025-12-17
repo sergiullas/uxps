@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
+import { AppBox as Box, AppTypography as Typography } from '../ui';
 import CaseStudyImage from './CaseStudyImage.jsx';
 import BeforeAfterSlider from '../media/BeforeAfterSlider.jsx';
 

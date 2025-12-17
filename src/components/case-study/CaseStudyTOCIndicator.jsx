@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { AppBox as Box } from '../ui';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
 export default function CaseStudyTOCIndicator({ top = 0, height = 0, isVisible = false }) {

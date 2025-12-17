@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  IconButton,
-  Link as MuiLink,
-  Typography,
-} from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 import { ColorModeContext } from './AppThemeProvider';
 import { mainNav } from '../../content/navigation.js';
 import { siteMeta } from '../../content/siteMeta.js';
+import {
+  AppTopBar as AppBar,
+  AppToolbar as Toolbar,
+  AppBox as Box,
+  AppIconButton as IconButton,
+  AppLink as MuiLink,
+  AppTypography as Typography,
+  appIcons,
+} from '../ui';
 
 function useScrollElevation(enabled) {
   const [elevated, setElevated] = React.useState(false);
@@ -132,6 +131,8 @@ function HeaderUtils() {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const isDarkMode = theme.palette.mode === 'dark';
+  const DarkModeIcon = appIcons.darkMode;
+  const LightModeIcon = appIcons.lightMode;
 
   return (
     <Box
@@ -165,7 +166,7 @@ function HeaderUtils() {
           },
         })}
       >
-        {isDarkMode ? <LightModeOutlinedIcon fontSize="small" /> : <DarkModeOutlinedIcon fontSize="small" />}
+        {isDarkMode ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
       </IconButton>
     </Box>
   );
