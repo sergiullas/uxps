@@ -6,6 +6,7 @@ import EditorialHero from '../components/modules/EditorialHero.jsx';
 import AppSection from '../components/ui/AppSection.jsx';
 import AppButton from '../components/ui/AppButton.jsx';
 import WorkItemCard from '../components/work/WorkItemCard.jsx';
+import SocialLinks from '../components/social/SocialLinks.jsx';
 import { siteMeta } from '../content/siteMeta.js';
 import { WORK_ITEMS, workContent } from '../content/work.js';
 import { RESUME } from '../content/resume.js';
@@ -205,6 +206,11 @@ export default function Home() {
               {contactContent.secondaryNote}
             </Typography>
           </Stack>
+          <SocialLinks
+            location="contact"
+            showLabels={true}
+            sx={{ flexDirection: 'column', alignItems: 'flex-start', mt: 1 }}
+          />
         </Stack>
       </AppSection>
     </>

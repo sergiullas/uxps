@@ -7,6 +7,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import AppSection from '../ui/AppSection.jsx';
 import AppButton from '../ui/AppButton.jsx';
 import { heroContent } from '../../content/hero.js';
+import SocialLinks from '../social/SocialLinks.jsx';
 
 export default function EditorialHero() {
   const theme = useTheme();
@@ -118,6 +119,7 @@ export default function EditorialHero() {
                 {heroContent.secondaryCta.label}
               </MuiLink>
             </Stack>
+            <SocialLinks location="hero" sx={{ mt: 2 }} />
           </Stack>
         </Stack>
 

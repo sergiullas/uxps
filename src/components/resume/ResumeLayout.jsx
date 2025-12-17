@@ -12,6 +12,7 @@ import ResumeMiniMap from './ResumeMiniMap.jsx';
 import { resumeConfig } from '../../content/resume.js';
 import { siteMeta } from '../../content/siteMeta.js';
 import { SlideUpOnScroll } from '../../lib/motion/index.js';
+import SocialLinks from '../social/SocialLinks.jsx';
 
 function ExperienceSection({ resumeData }) {
   const companies = React.useMemo(() => resumeData?.experience?.companies || [], [resumeData]);
@@ -96,13 +97,9 @@ function ResumeHeader({ description }) {
         <Typography variant="body2">
           <a href={`mailto:${siteMeta.email}`}>{siteMeta.email}</a>
         </Typography>
-        <Typography variant="body2" aria-hidden="true">
-          ·
-        </Typography>
-        <Typography variant="body2">
-          <a href={siteMeta.social.linkedin}>LinkedIn</a>
-        </Typography>
       </Stack>
+
+      <SocialLinks location="resume" />
 
       <Box>
         <Button variant="outlined" onClick={() => window.print()} sx={{ mt: 1 }}>

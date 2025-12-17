@@ -59,3 +59,18 @@ main {
     --context-transition: 0ms;
   }
 }
+
+@media print {
+  .social-links-nav {
+    display: none !important;
+  }
+
+  .social-links-nav.print-as-text {
+    display: block !important;
+  }
+
+  .social-links-nav.print-as-text a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}
