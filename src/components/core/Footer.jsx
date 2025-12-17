@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Link as MuiLink, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 
-import { footerNav } from '../../content/navigation.js';
 import { siteMeta } from '../../content/siteMeta.js';
+import SocialLinks from '../social/SocialLinks.jsx';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,33 +27,7 @@ export default function Footer() {
           {siteMeta.footer.tagline}
         </Typography>
 
-        <Stack
-          component="nav"
-          direction="row"
-          spacing={2}
-          aria-label="Footer navigation"
-          sx={{ justifyContent: 'center', flexWrap: 'wrap' }}
-        >
-          {footerNav.map((item) => (
-            <MuiLink
-              key={item.href}
-              href={item.href}
-              underline="hover"
-              color="text.secondary"
-              sx={(t) => ({
-                px: t.spacing(1),
-                py: t.spacing(0.5),
-                borderRadius: t.shape.borderRadius,
-                '&:focus-visible': {
-                  outline: `2px solid ${t.palette.text.primary}`,
-                  outlineOffset: t.spacing(0.5),
-                },
-              })}
-            >
-              {item.label}
-            </MuiLink>
-          ))}
-        </Stack>
+        <SocialLinks location="footer" sx={{ justifyContent: 'center' }} />
 
         <Typography variant="caption" color="text.secondary">
           {copyright}
