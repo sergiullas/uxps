@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardContent, Box, Grid, Typography } from '@mui/material';
+import { AppCard as Card, AppCardContent as CardContent, AppBox as Box, AppGrid as Grid, AppTypography as Typography } from '../ui';
 import { recruiterEssentials } from '../../content/recruiterEssentials.js';
 import IconRenderer from './IconRenderer.jsx';
 

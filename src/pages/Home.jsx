@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { Box, Divider, Stack, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 
 import EditorialHero from '../components/modules/EditorialHero.jsx';
-import AppSection from '../components/ui/AppSection.jsx';
-import AppButton from '../components/ui/AppButton.jsx';
+import {
+  AppBox as Box,
+  AppDivider as Divider,
+  AppStack as Stack,
+  AppTypography as Typography,
+  AppSection,
+  AppButton,
+} from '../components/ui';
 import WorkItemCard from '../components/work/WorkItemCard.jsx';
 import SocialLinks from '../components/social/SocialLinks.jsx';
 import { siteMeta } from '../content/siteMeta.js';

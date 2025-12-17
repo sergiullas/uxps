@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Box, Stack, Typography, Link as MuiLink } from '@mui/material';
+import { AppBox as Box, AppStack as Stack, AppTypography as Typography, AppLink as MuiLink, appIcons } from '../ui';
 import { useTheme, alpha } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 import AppSection from '../ui/AppSection.jsx';
 import AppButton from '../ui/AppButton.jsx';
@@ -11,6 +10,7 @@ import SocialLinks from '../social/SocialLinks.jsx';
 
 export default function EditorialHero() {
   const theme = useTheme();
+  const MailIcon = appIcons.mail;
 
   return (
     <AppSection
@@ -187,7 +187,7 @@ export default function EditorialHero() {
               },
             }}
           >
-            <MailOutlineIcon fontSize="small" />
+            <MailIcon fontSize="small" />
             <Typography
               component="span"
               variant="body2"

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Box, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import {
+  AppBox as Box,
+  AppToggleButton as ToggleButton,
+  AppToggleButtonGroup as ToggleButtonGroup,
+  AppTypography as Typography,
+} from '../ui';
 
 export default function ResumeFilters({ activeEra, onEraChange, totalCounts }) {
   const handleChange = (event, newValue) => {

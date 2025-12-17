@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Chip, IconButton, Stack, Tooltip, Typography } from '@mui/material';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { AppChip as Chip, AppIconButton as IconButton, AppStack as Stack, AppTooltip as Tooltip, AppTypography as Typography, appIcons } from '../ui';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 import { resumeConfig } from '../../content/resume.js';
 
@@ -13,6 +12,7 @@ export default function ResumePronunciation() {
   const [activeSourceIndex, setActiveSourceIndex] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const audioRef = React.useRef(null);
+  const VolumeIcon = appIcons.volume;
 
   const hasSources = Boolean(sources.length);
   const activeSource = sources[activeSourceIndex] || sources[0];
@@ -61,7 +61,7 @@ export default function ResumePronunciation() {
           onClick={handlePlay}
           aria-label={`Play ${activeLabel}`}
         >
-          <VolumeUpIcon fontSize="small" />
+          <VolumeIcon fontSize="small" />
         </IconButton>
       </Tooltip>
 

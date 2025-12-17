@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { List, ListItemButton, ListItemText, Paper, Typography } from '@mui/material';
+import {
+  AppList as List,
+  AppListItemButton as ListItemButton,
+  AppListItemText as ListItemText,
+  AppPaper as Paper,
+  AppTypography as Typography,
+} from '../ui';
 import { resumeConfig, resumeSections } from '../../content/resume.js';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 

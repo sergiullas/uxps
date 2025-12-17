@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { AppStack as Stack, AppTypography as Typography } from '../components/ui';
 import { Helmet } from 'react-helmet-async';
 
 import AppSection from '../components/ui/AppSection.jsx';

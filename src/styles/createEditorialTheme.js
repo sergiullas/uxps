@@ -5,13 +5,43 @@ export function createEditorialTheme(mode = 'light') {
   const paletteTokens =
     mode === 'dark' ? editorialThemeTokens.palette.dark : editorialThemeTokens.palette.light;
 
+  const focusRingColor = mode === 'dark' ? paletteTokens.primary.light : paletteTokens.primary.main;
+
+  const transitions = {
+    duration: {
+      shortest: editorialThemeTokens.motion.durations.xshort * 1000,
+      shorter: editorialThemeTokens.motion.durations.short * 1000,
+      short: editorialThemeTokens.motion.durations.medium * 1000,
+      standard: editorialThemeTokens.motion.durations.long * 1000,
+    },
+    easing: {
+      easeInOut: `cubic-bezier(${editorialThemeTokens.motion.easing.standard.join(',')})`,
+      easeOut: `cubic-bezier(${editorialThemeTokens.motion.easing.standard.join(',')})`,
+      easeIn: `cubic-bezier(${editorialThemeTokens.motion.easing.emphasized.join(',')})`,
+      sharp: `cubic-bezier(${editorialThemeTokens.motion.easing.emphasized.join(',')})`,
+    },
+  };
+
   const theme = createTheme({
     palette: paletteTokens,
     typography: editorialThemeTokens.typography,
     shape: editorialThemeTokens.shape,
     spacing: editorialThemeTokens.spacing,
-    
-    // New top-level property for custom shadows (Declarative approach)
+    transitions,
+
+    custom: {
+      focus: {
+        ringWidth: 3,
+        ringColor: focusRingColor,
+        ringOuterColor: paletteTokens.background.paper,
+        ringOffset: 3,
+      },
+      interaction: {
+        hoverLift: 4,
+        hoverShadow: '0 10px 30px rgba(0,0,0,0.12)',
+      },
+    },
+
     customShadows: {
       card: editorialThemeTokens.shadows.card,
     },

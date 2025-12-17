@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
+import { AppBox as Box, AppTypography as Typography } from '../ui';
 import ReactCompareImage from 'react-compare-image';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 import CaseStudyImage from '../case-study/CaseStudyImage.jsx';

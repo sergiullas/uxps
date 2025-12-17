@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { AppBox as Box, AppStack as Stack, AppTypography as Typography } from '../ui';
 import CertificationCard from './CertificationCard.jsx';
 
 export default function ResumeCertifications({ certifications }) {

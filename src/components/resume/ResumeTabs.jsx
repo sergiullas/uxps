@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { AppBox as Box, AppTabs as Tabs, AppTab as Tab, AppTypography as Typography } from '../ui';
 import ResumeSummary from './ResumeSummary.jsx';
 import ResumeSkills from './ResumeSkills.jsx';
 import ResumeTimeline from './ResumeTimeline.jsx';

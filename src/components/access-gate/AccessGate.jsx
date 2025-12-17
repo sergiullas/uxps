@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
-  Alert,
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+  AppAlert as Alert,
+  AppBox as Box,
+  AppButton as Button,
+  AppDialog as Dialog,
+  AppDialogActions as DialogActions,
+  AppDialogContent as DialogContent,
+  AppDialogTitle as DialogTitle,
+  AppStack as Stack,
+  AppTextField as TextField,
+  AppTypography as Typography,
+} from '../ui';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
 export default function AccessGate({

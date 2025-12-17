@@ -1,16 +1,15 @@
 import * as React from 'react';
 import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Chip,
-  Stack,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import LaunchIcon from '@mui/icons-material/Launch';
+  AppBox as Box,
+  AppCard as Card,
+  AppCardActionArea as CardActionArea,
+  AppCardContent as CardContent,
+  AppChip as Chip,
+  AppStack as Stack,
+  AppTooltip as Tooltip,
+  AppTypography as Typography,
+  appIcons,
+} from '../ui';
 import { useTheme } from '@mui/material/styles';
 import { getMotionComponent, useMotionConfig } from '../../lib/motion/index.js';
 
@@ -18,6 +17,8 @@ export default function CertificationCard({ certification }) {
   const { title, issuer, timeframeLabel, verificationUrl, isVerified, description } = certification;
   const showVerification = Boolean(verificationUrl || isVerified);
   const theme = useTheme();
+  const VerifiedIcon = appIcons.verified;
+  const LaunchIcon = appIcons.launch;
   const { prefersReducedMotion, motion } = useMotionConfig();
   const MotionCard = getMotionComponent(Card);
   const hoverShadow = theme.shadows[4];

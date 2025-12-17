@@ -1,21 +1,22 @@
 import * as React from 'react';
+import { alpha, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
-  alpha,
-  Avatar,
-  Box,
-  Chip,
-  IconButton,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+  AppAvatar as Avatar,
+  AppBox as Box,
+  AppChip as Chip,
+  AppIconButton as IconButton,
+  AppStack as Stack,
+  AppTypography as Typography,
+  appIcons,
+} from '../ui';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FadeIn, SlideUpOnScroll, StaggerList } from '../../lib/motion/index.js';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 import { formatDateRange } from '../../utils/date.js';
+
+const ExpandLessIcon = appIcons.expandLess;
+const ExpandMoreIcon = appIcons.expandMore;
 
 const MotionBox = motion.div;
 

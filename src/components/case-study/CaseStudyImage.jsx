@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { AppBox as Box } from '../ui';
 
 export default function CaseStudyImage({ src, alt }) {
   if (!src) return null;
