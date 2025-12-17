@@ -23,6 +23,15 @@ export default function SocialLinks({
     return null;
   }
 
+  if (Array.isArray(settings.locations) && !settings.locations.includes(location)) {
+    if (import.meta?.env?.DEV) {
+      console.warn(
+        `[SocialLinks] Unknown location "${location}". Add it to socialLinks.settings.locations if valid.`,
+      );
+    }
+    return null;
+  }
+
   const visible = platforms.filter(
     (p) => Array.isArray(p.showIn) && p.showIn.includes(location) && p.url,
   );
