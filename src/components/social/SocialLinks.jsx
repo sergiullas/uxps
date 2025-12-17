@@ -6,6 +6,12 @@ import socialLinks from '../../content/socialLinks.js';
 import SocialIconRenderer from './SocialIconRenderer.jsx';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion.js';
 
+const warnDev = (message) => {
+  if (import.meta?.env?.DEV) {
+    console.warn(message);
+  }
+};
+
 export default function SocialLinks({
   location,
   sx,
@@ -15,26 +21,46 @@ export default function SocialLinks({
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const { settings, platforms } = socialLinks;
+  const validLocations = React.useMemo(
+    () => new Set(Array.isArray(settings.locations) ? settings.locations : []),
+    [settings.locations],
+  );
 
   if (!location) {
-    if (import.meta?.env?.DEV) {
-      console.warn('[SocialLinks] Missing required prop: location');
-    }
+    warnDev('[SocialLinks] Missing required prop: location');
     return null;
   }
 
-  if (Array.isArray(settings.locations) && !settings.locations.includes(location)) {
-    if (import.meta?.env?.DEV) {
-      console.warn(
-        `[SocialLinks] Unknown location "${location}". Add it to socialLinks.settings.locations if valid.`,
-      );
-    }
+  if (validLocations.size > 0 && !validLocations.has(location)) {
+    warnDev(
+      `[SocialLinks] Unknown location "${location}". Add it to socialLinks.settings.locations if valid.`,
+    );
     return null;
   }
 
-  const visible = platforms.filter(
-    (p) => Array.isArray(p.showIn) && p.showIn.includes(location) && p.url,
-  );
+  const visible = React.useMemo(() => {
+    const items = [];
+
+    platforms.forEach((platform) => {
+      if (!Array.isArray(platform.showIn)) {
+        warnDev(`[SocialLinks] Platform "${platform.id}" is missing required showIn array.`);
+        return;
+      }
+
+      const unknownTargets = platform.showIn.filter((loc) => !validLocations.has(loc));
+      if (unknownTargets.length > 0) {
+        warnDev(
+          `[SocialLinks] Platform "${platform.id}" targets unknown locations: ${unknownTargets.join(', ')}.`,
+        );
+      }
+
+      if (platform.showIn.includes(location) && platform.url) {
+        items.push(platform);
+      }
+    });
+
+    return items;
+  }, [location, platforms, validLocations]);
 
   if (visible.length === 0) return null;
 
